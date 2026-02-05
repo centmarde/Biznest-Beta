@@ -4,7 +4,7 @@ import {
   type RouteRecordRaw,
 } from "vue-router";
 
-import HomePage from "../pages/HomePage.vue";
+import Landing from "@/pages/LandingPage/LandingView.vue";
 
 // Businessman Routes
 
@@ -13,8 +13,8 @@ import HomePage from "../pages/HomePage.vue";
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    name: "Home",
-    component: HomePage,
+    name: "Landing",
+    component: Landing,
   },
 ];
 
