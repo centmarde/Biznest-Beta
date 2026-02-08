@@ -40,7 +40,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,vue}": [
-      "npm run type-check:src"
+      "bash -c 'npm run type-check:src'"
     ]
   }
 }
