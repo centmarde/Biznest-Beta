@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Construction, ArrowLeft } from 'lucide-vue-next'
+import { TypographyH2, TypographyP, TypographySmall } from '@/components/ui/typography'
 
 interface Props {
   title?: string
@@ -37,14 +38,14 @@ const handleBack = () => {
       </div>
 
       <!-- Title -->
-      <h2 class="text-3xl font-bold text-gray-800 mb-3">
+      <TypographyH2 class="text-gray-800 mb-3">
         {{ props.title }}
-      </h2>
+      </TypographyH2>
 
       <!-- Description -->
-      <p class="text-gray-600 text-base leading-relaxed px-4">
+      <TypographyP class="text-gray-600 px-4">
         {{ props.description }}
-      </p>
+      </TypographyP>
 
       <!-- Back Button -->
       <div v-if="props.showBackButton" class="mt-8">
@@ -60,9 +61,9 @@ const handleBack = () => {
       </div>
 
       <!-- Footer -->
-      <p class="text-sm text-gray-500 mt-10">
+      <TypographySmall class="text-gray-500 mt-10">
         More features available soon
-      </p>
+      </TypographySmall>
 
     </div>
   </div>

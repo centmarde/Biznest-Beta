@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { Home, Search } from 'lucide-vue-next'
+import { TypographyH1, TypographyH2, TypographyP, TypographySmall } from '@/components/ui/typography'
 
 const router = useRouter()
 
@@ -14,11 +15,11 @@ const goBack = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+  <div class="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
     <div class="text-center max-w-2xl w-full">
       <!-- 404 Number -->
       <div class="mb-8">
-        <h1 class="text-9xl font-bold text-green-600 opacity-20">404</h1>
+        <TypographyH1 class="text-green-600 opacity-20">404</TypographyH1>
       </div>
 
       <!-- Icon -->
@@ -29,14 +30,14 @@ const goBack = () => {
       </div>
 
       <!-- Title -->
-      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+      <TypographyH2 class="text-gray-800 mb-4">
         Page Not Found
-      </h2>
+      </TypographyH2>
 
       <!-- Description -->
-      <p class="text-gray-600 text-lg leading-relaxed mb-8 px-4">
+      <TypographyP class="text-gray-600 mb-8 px-4">
         Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
-      </p>
+      </TypographyP>
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -63,9 +64,9 @@ const goBack = () => {
       </div>
 
       <!-- Footer Text -->
-      <p class="text-sm text-gray-500 mt-12">
+      <TypographySmall class="text-gray-500 mt-12">
         If you believe this is an error, please contact support.
-      </p>
+      </TypographySmall>
     </div>
   </div>
 </template>
