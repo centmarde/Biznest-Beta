@@ -28,9 +28,13 @@ const navigateTo = (path: string) => {
           <Button
             variant="link"
             @click="navigateTo('/')"
-            class="text-2xl font-bold text-foreground hover:text-foreground/90 transition-colors hover:no-underline p-0 h-auto"
+            class="hover:no-underline p-0 h-auto"
           >
-            Biznest
+            <img
+              src="/logo.jpg"
+              alt="Biznest Logo"
+              class="h-10 w-auto rounded-full"
+            />
           </Button>
         </div>
 
