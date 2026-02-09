@@ -40,7 +40,7 @@ import { Card } from "@/components/ui/card";
           >
             <!-- Layer 1: Back Card (Primary Color) - Large, Right side, Vertically centered -->
             <Card
-              class="absolute right-0 top-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-primary border-none shadow-none z-0 rounded-l-3xl rounded-r-none"
+              class="absolute right-0 top-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-prof-navy dark:bg-primary border-none shadow-none z-0 rounded-l-3xl rounded-r-none"
             />
 
             <!-- Layer 2: Middle Card (Background Color) - Smaller, Right side (inside Layer 1), Vertically centered -->
