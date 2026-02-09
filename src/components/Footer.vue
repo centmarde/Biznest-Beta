@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const currentYear = new Date().getFullYear();
+import TypographyMuted from "./ui/typography/TypographyMuted.vue";
 </script>
 
 <template>
@@ -8,9 +9,7 @@ const currentYear = new Date().getFullYear();
       class="container mx-auto flex flex-col items-center justify-center gap-4 px-4 md:h-24 md:flex-row md:px-8"
     >
       <div class="flex flex-col items-center gap-4 md:flex-row md:gap-2">
-        <p
-          class="text-center text-sm leading-loose text-muted-foreground md:text-left"
-        >
+        <TypographyMuted>
           Built by
           <a
             href="#"
@@ -21,7 +20,7 @@ const currentYear = new Date().getFullYear();
             Biznest
           </a>
           . &copy; {{ currentYear }} All rights reserved.
-        </p>
+        </TypographyMuted>
       </div>
     </div>
   </footer>
