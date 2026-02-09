@@ -10,12 +10,14 @@
     "prepare": "husky",
     "type-check": "vue-tsc --noEmit",
     "type-check:src": "vue-tsc --noEmit --project tsconfig.app.json",
+    "type-check:staged": "vue-tsc --noEmit --project tsconfig.app.json",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/vue-table": "^8.21.3",
     "@vueuse/core": "^14.2.0",
+    "axios": "^1.13.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.562.0",
