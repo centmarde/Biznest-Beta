@@ -10,6 +10,7 @@
     "prepare": "husky",
     "type-check": "vue-tsc --noEmit",
     "type-check:src": "vue-tsc --noEmit --project tsconfig.app.json",
+    "type-check:staged": "vue-tsc --noEmit --project tsconfig.app.json",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -41,7 +42,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,vue}": [
-      "npm run type-check:src"
+      "bash -c 'npm run type-check:src'"
     ]
   }
 }
