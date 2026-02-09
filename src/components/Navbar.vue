@@ -18,7 +18,7 @@ const navigateTo = (path: string) => {
 
 <template>
   <nav
-    class="bg-background/90 border-b border-[#0A2540]/10 sticky top-0 z-50 backdrop-blur-sm"
+    class="bg-background/90 border-b border-prof-navy/10 sticky top-0 z-50 backdrop-blur-sm"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
@@ -65,7 +65,7 @@ const navigateTo = (path: string) => {
           <ModeToggle />
           <button
             @click="navigateTo('/signup')"
-            class="bg-[#C9A24D] hover:bg-[#C9A24D]/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
+            class="bg-prof-gold hover:bg-prof-gold/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
           >
             Get Started
           </button>
@@ -114,7 +114,7 @@ const navigateTo = (path: string) => {
     <!-- Mobile Menu -->
     <div
       v-if="isMobileMenuOpen"
-      class="md:hidden bg-[#0A2540] border-t border-white/10"
+      class="md:hidden bg-prof-navy border-t border-white/10"
     >
       <div class="px-4 pt-2 pb-3 space-y-1">
         <button
@@ -148,7 +148,7 @@ const navigateTo = (path: string) => {
         </div>
         <button
           @click="navigateTo('/signup')"
-          class="block w-full text-center bg-prof-gold hover:bg-[#C9A24D]/90 text-foreground px-3 py-2 rounded-md text-base font-medium transition-colors"
+          class="block w-full text-center bg-prof-gold hover:bg-prof-gold/90 text-foreground px-3 py-2 rounded-md text-base font-medium transition-colors"
         >
           Get Started
         </button>
