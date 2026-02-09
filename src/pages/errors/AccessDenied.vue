@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { ShieldAlert, Home, ArrowLeft } from 'lucide-vue-next'
+import { TypographyH1, TypographyH2, TypographyP, TypographySmall } from '@/components/ui/typography'
 
 const router = useRouter()
 
@@ -18,7 +19,7 @@ const goBack = () => {
     <div class="text-center max-w-2xl w-full">
       <!-- Error Code -->
       <div class="mb-8">
-        <h1 class="text-9xl font-bold text-red-600 opacity-20">403</h1>
+        <TypographyH1 class="text-red-600 opacity-20">403</TypographyH1>
       </div>
 
       <!-- Icon -->
@@ -29,14 +30,14 @@ const goBack = () => {
       </div>
 
       <!-- Title -->
-      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+      <TypographyH2 class="text-gray-800 mb-4">
         Access Denied
-      </h2>
+      </TypographyH2>
 
       <!-- Description -->
-      <p class="text-gray-600 text-lg leading-relaxed mb-8 px-4">
+      <TypographyP class="text-gray-600 mb-8 px-4">
         You don't have permission to access this page. Please contact your administrator if you believe this is a mistake.
-      </p>
+      </TypographyP>
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -64,9 +65,9 @@ const goBack = () => {
       </div>
 
       <!-- Footer Text -->
-      <p class="text-sm text-gray-500 mt-12">
+      <TypographySmall class="text-gray-500 mt-12">
         Need help? Contact support@biznest.com
-      </p>
+      </TypographySmall>
     </div>
   </div>
 </template>

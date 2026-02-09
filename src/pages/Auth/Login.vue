@@ -10,7 +10,7 @@ const handleBack = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center">
+  <div class="min-h-screen bg-linear-to-br from-green-50 to-blue-50 flex items-center justify-center">
     <FeatureUnavailable
       title="Login Feature Coming Soon"
       description="User authentication and login functionality is currently under development. Stay tuned for secure access to your Biznest account!"

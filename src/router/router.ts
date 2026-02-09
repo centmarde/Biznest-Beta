@@ -3,25 +3,19 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "vue-router";
-import {
-  AdminRoutes,
-  LGORoutes
-} from "@/lib/routes"
-
-
-// Businessman Routes
-
-// LGU Routes
 
 const routes: RouteRecordRaw[] = [
-  ...AdminRoutes,
-  ...LGORoutes,
+    {
+        path: "/",
+        name: "Landing",
+        component: () => import('@/pages/LandingPage/LandingView.vue'),
+    },
    {
-        path: '/',
+        path: '/login',
         name: 'login',
         component: () => import('@/pages/Auth/Login.vue'),
         meta: {
-            title: 'PCIC Staff Login',
+            title: 'Login',
             guard: 'guest'
         }
     },
@@ -32,8 +26,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/Auth/Register.vue'),
         meta: {
             title: 'User Registration',
-            guard: 'guest',
-            requiresToken: true
+            guard: 'guest'
         }
     },
     // Error Pages
