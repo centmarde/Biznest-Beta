@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <Navbar />
+    <main class="flex-1">
+      <slot name="content"></slot>
+    </main>
+    <Footer />
   </div>
-  <slot name="content"></slot>
-  <!-- <div class="text-center my-5">Footer Direa</div> -->
 </template>
 
 <style scoped></style>
