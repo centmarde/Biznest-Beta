@@ -7,12 +7,13 @@
 
     <CardContent class="space-y-6">
       <!-- Email and Password Form -->
-      <form @submit.prevent="handleEmailLogin" class="space-y-4">
+      <form @submit.prevent="$emit('submit')" class="space-y-4">
         <div class="space-y-2">
           <Label for="email">Email</Label>
           <Input
             id="email"
-            v-model="email"
+            :model-value="email"
+            @update:model-value="(value) => $emit('update:email', value as string)"
             type="email"
             placeholder="Enter your email"
             required
@@ -24,7 +25,8 @@
           <Label for="password">Password</Label>
           <Input
             id="password"
-            v-model="password"
+            :model-value="password"
+            @update:model-value="(value) => $emit('update:password', value as string)"
             type="password"
             placeholder="Enter your password"
             required
@@ -36,7 +38,8 @@
           <div class="flex items-center space-x-2">
             <input
               id="remember"
-              v-model="rememberMe"
+              :checked="rememberMe"
+              @change="$emit('update:rememberMe', ($event.target as HTMLInputElement).checked)"
               type="checkbox"
               class="h-4 w-4 rounded border-input"
             />
@@ -44,7 +47,7 @@
               Remember me
             </Label>
           </div>
-          <Button variant="link" size="sm" class="p-0 h-auto" @click="forgotPassword">
+          <Button variant="link" size="sm" class="p-0 h-auto" @click="$emit('forgotPassword')">
             Forgot password?
           </Button>
         </div>
@@ -68,7 +71,7 @@
           variant="ghost"
           size="icon"
           class="h-10 w-10 hover:bg-accent"
-          @click="loginWithGoogle"
+          @click="$emit('loginWithGoogle')"
           title="Continue with Google"
         >
           <svg class="h-6 w-6" viewBox="0 0 24 24">
@@ -85,7 +88,7 @@
           variant="ghost"
           size="icon"
           class="h-10 w-10 hover:bg-accent"
-          @click="loginWithFacebook"
+          @click="$emit('loginWithFacebook')"
           title="Continue with Facebook"
         >
           <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -99,7 +102,7 @@
           variant="ghost"
           size="icon"
           class="h-10 w-10 hover:bg-accent"
-          @click="loginWithApple"
+          @click="$emit('loginWithApple')"
           title="Continue with Apple"
         >
           <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -112,7 +115,7 @@
     <CardFooter class="pt-6 border-t">
       <div class="text-center text-sm text-muted-foreground w-full">
         Don't have an account?
-        <Button variant="link" size="sm" class="p-0 h-auto ml-1" @click="goToSignUp">
+        <Button variant="link" size="sm" class="p-0 h-auto ml-1" @click="$emit('goToSignUp')">
           Sign up
         </Button>
       </div>
@@ -121,52 +124,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 
-// Form state
-const email = ref('')
-const password = ref('')
-const rememberMe = ref(false)
+// Define props
+defineProps<{
+  email: string
+  password: string
+  rememberMe: boolean
+}>()
 
-// OAuth login methods
-const loginWithGoogle = () => {
-  console.log('Login with Google')
-  // Implement Google OAuth logic here
-}
-
-const loginWithFacebook = () => {
-  console.log('Login with Facebook')
-  // Implement Facebook OAuth logic here
-}
-
-const loginWithApple = () => {
-  console.log('Login with Apple')
-  // Implement Apple OAuth logic here
-}
-
-// Email/Password login
-const handleEmailLogin = () => {
-  console.log('Email login:', {
-    email: email.value,
-    password: password.value,
-    rememberMe: rememberMe.value
-  })
-  // Implement email/password login logic here
-}
-
-// Utility methods
-const forgotPassword = () => {
-  console.log('Forgot password clicked')
-  // Navigate to forgot password page or show modal
-}
-
-const goToSignUp = () => {
-  console.log('Go to sign up clicked')
-  // Navigate to sign up page
-}
+// Define emits
+defineEmits<{
+  'update:email': [value: string]
+  'update:password': [value: string]
+  'update:rememberMe': [value: boolean]
+  submit: []
+  forgotPassword: []
+  loginWithGoogle: []
+  loginWithFacebook: []
+  loginWithApple: []
+  goToSignUp: []
+}>()
 </script>
+
