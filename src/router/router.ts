@@ -11,7 +11,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/LandingPage/LandingView.vue'),
     },
    {
-        path: '/login',
+        path: '/signin',
         name: 'login',
         component: () => import('@/pages/Auth/Login.vue'),
         meta: {
@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
     },
     // Registration
     {
-        path: '/register',
+        path: '/signup',
         name: 'register',
         component: () => import('@/pages/Auth/Register.vue'),
         meta: {

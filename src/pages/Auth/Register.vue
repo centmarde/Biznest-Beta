@@ -10,7 +10,7 @@ const handleBack = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center">
+  <div class="min-h-screen bg-linear-to-br from-green-50 to-blue-50 flex items-center justify-center">
     <FeatureUnavailable
       title="Registration Coming Soon"
       description="New user registration is currently under development. Soon you'll be able to create your Biznest account and start connecting with business opportunities!"
