@@ -2,22 +2,13 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import type { Recommendation } from '../composables/useBusinessData'
+import { getStatusColor } from '../utils/helpers'
 
 interface Props {
   recommendations: Recommendation[]
 }
 
 defineProps<Props>()
-
-const getStatusColor = (color: string) => {
-  const colors: Record<string, string> = {
-    green: 'bg-green-100 text-green-800',
-    yellow: 'bg-yellow-100 text-yellow-800',
-    orange: 'bg-orange-100 text-orange-800',
-    red: 'bg-red-100 text-red-800'
-  }
-  return colors[color] || colors.green
-}
 </script>
 
 <template>
@@ -27,63 +18,79 @@ const getStatusColor = (color: string) => {
         <!-- Header -->
         <div class="flex items-center justify-between mb-4">
           <div>
-            <h3 class="text-lg font-semibold text-gray-900">No Recommended Locations Yet</h3>
-            <p class="text-sm text-gray-500 mt-1">
-              Update your preferences or expand your area to see matches.
-            </p>
+            <template v-if="recommendations.length === 0">
+              <TypographyH3 class="text-prof-navy">No Recommended Locations Yet</TypographyH3>
+            </template>
+            <template v-else>
+              <TypographyP class="font-semibold text-prof-navy">Recommended Locations</TypographyP>
+            </template>
           </div>
           <Button variant="link" class="text-[#0a2540]">
             See All →
           </Button>
         </div>
 
+        <!-- No Results Message -->
+        <div v-if="recommendations.length === 0" class="text-center py-8">
+          <TypographyP class="text-prof-navy">
+            Update your preferences or expand your area to see matches.
+          </TypographyP>
+        </div>
+
+        <!-- Subtitle for when there are recommendations -->
+        <div v-if="recommendations.length > 0" class="mb-4">
+          <TypographyP class="text-prof-navy">
+            Based on your preferences, here are some locations you might like.
+          </TypographyP>
+        </div>
+
         <!-- Recommendations List -->
         <div class="space-y-3">
-      <div
-        v-for="rec in recommendations"
-        :key="rec.id"
-        class="flex items-center gap-4 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
-      >
-        <!-- Status Badge -->
-        <span
-          :class="getStatusColor(rec.statusColor)"
-          class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap"
-        >
-          ● {{ rec.status }}
-        </span>
+            <div
+            v-for="rec in recommendations"
+            :key="rec.id"
+            class="flex items-center gap-4 p-4 bg-white border border-foreground/40 rounded-lg hover:shadow-md transition-shadow"
+            >
+            <!-- Status Badge -->
+            <span
+              :class="getStatusColor(rec.statusColor)"
+              class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap"
+            >
+              ● {{ rec.status }}
+            </span>
 
-        <!-- Title and Subtitle -->
-        <div class="flex-1 min-w-0">
-          <p class="font-semibold text-gray-900">{{ rec.title }}</p>
-          <p class="text-sm text-gray-500">{{ rec.subtitle }}</p>
+            <!-- Title and Subtitle -->
+            <div class="flex-1 min-w-0">
+              <TypographyP class="font-semibold text-foreground">{{ rec.title }}</TypographyP>
+              <TypographyP class="text-foreground/60">{{ rec.subtitle }}</TypographyP>
+            </div>
+
+            <!-- Price -->
+            <div class="text-right min-w-25">
+              <TypographyP class="font-semibold text-gray-900">{{ rec.price }}</TypographyP>
+              <TypographyP class="text-xs text-gray-500">{{ rec.date }}</TypographyP>
+            </div>
+
+            <!-- Location -->
+            <div class="text-sm text-gray-600 min-w-25">
+              {{ rec.location }}
+            </div>
+
+            <!-- Actions Menu -->
+            <DropdownMenu>
+              <DropdownMenuTrigger as-child>
+                <Button variant="ghost" size="sm" class="h-8 w-8 p-0">
+                  <span class="text-xl text-gray-400">⋯</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>View Details</DropdownMenuItem>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem class="text-destructive">Delete</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
-
-        <!-- Price -->
-        <div class="text-right min-w-[100px]">
-          <p class="font-semibold text-gray-900">{{ rec.price }}</p>
-          <p class="text-xs text-gray-500">{{ rec.date }}</p>
-        </div>
-
-        <!-- Location -->
-        <div class="text-sm text-gray-600 min-w-[100px]">
-          {{ rec.location }}
-        </div>
-
-        <!-- Actions Menu -->
-        <DropdownMenu>
-          <DropdownMenuTrigger as-child>
-            <Button variant="ghost" size="sm" class="h-8 w-8 p-0">
-              <span class="text-xl text-gray-400">⋯</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>View Details</DropdownMenuItem>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem class="text-destructive">Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </div>
       </div>
     </div>
   </div>
