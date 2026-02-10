@@ -16,7 +16,7 @@ const selectTile = (id: string) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-background">
     <!-- Top Navbar -->
     <BusinessNavbar />
 
@@ -32,12 +32,12 @@ const selectTile = (id: string) => {
       <!-- Main Content -->
       <main class="flex-1 p-8 pl-4">
         <!-- Content Area -->
-        <div class="bg-white rounded-lg shadow-sm p-8 pb-6">
+        <div class="bg-card rounded-lg shadow-sm p-8 pb-6">
           <!-- Header -->
           <div class="mb-8 text-center">
-            <h1 class="text-2xl font-bold text-[#052A5D] uppercase mb-2">
+            <TypographyH1 class="uppercase mb-2">
               WHAT BEST DESCRIBES YOUR CURRENT BUSINESS SITUATION?
-            </h1>
+            </TypographyH1>
             <p class="text-sm text-gray-600">Select one option below</p>
           </div>
 
