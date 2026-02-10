@@ -1,3 +1,5 @@
+import { ref } from 'vue'
+
 export interface TileOption {
   id: string
   title: string
@@ -14,6 +16,20 @@ export interface Recommendation {
   date: string
   location: string
 }
+
+// Navigation state
+const activeNav = ref('business-profile')
+const isCollapsed = ref(false)
+
+const toggleCollapse = () => {
+  isCollapsed.value = !isCollapsed.value
+}
+
+export const useBusinessNav = () => ({
+  activeNav,
+  isCollapsed,
+  toggleCollapse
+})
 
 export const useMockBusinessData = () => {
   const tileOptions: TileOption[] = [
