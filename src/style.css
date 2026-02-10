@@ -1,9 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Agrandir";
+  src: url("/fonts/Agrandir-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: "Agrandir", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -125,6 +133,6 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }
