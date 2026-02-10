@@ -4,6 +4,7 @@ import TypographyH1 from "@/components/ui/typography/TypographyH1.vue";
 import TypographyList from "@/components/ui/typography/TypographyList.vue";
 import TypographyP from "@/components/ui/typography/TypographyP.vue";
 import { Card } from "@/components/ui/card";
+import FeatureGrid from "./components/FeatureGrid.vue";
 </script>
 
 <template>
@@ -61,6 +62,9 @@ import { Card } from "@/components/ui/card";
           </div>
         </div>
       </div>
+
+      <!-- Feature Grid Section -->
+      <FeatureGrid />
     </template>
   </OuterLayout>
 </template>
