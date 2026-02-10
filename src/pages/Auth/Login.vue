@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import FeatureUnavailable from '@/components/FeatureUnavailable.vue'
+import LoginCard from '@/components/LoginCard.vue'
 
-const router = useRouter()
-
-const handleBack = () => {
-  router.push('/')
-}
 </script>
 
 <template>
-  <div class="min-h-screen bg-linear-to-br from-green-50 to-blue-50 flex items-center justify-center">
-    <FeatureUnavailable
-      title="Login Feature Coming Soon"
-      description="User authentication and login functionality is currently under development. Stay tuned for secure access to your Biznest account!"
-      @back="handleBack"
-    />
+  <div class="min-h-screen h-screen overflow-hidden relative flex items-center justify-end">
+    <!-- Background Image -->
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style="background-image: url('/Buildings1.jpg')"
+    >
+      <!-- Overlay for better text readability -->
+      <div class="absolute inset-0 bg-black/40"></div>
+    </div>
+
+    <!-- Login Card Container - Right Side -->
+    <div class="relative z-10 w-full max-w-md mr-8 lg:mr-16 xl:mr-24">
+      <LoginCard />
+    </div>
   </div>
 </template>
