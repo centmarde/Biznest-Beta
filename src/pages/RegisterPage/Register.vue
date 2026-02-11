@@ -3,7 +3,7 @@ import RegisterCard from '@/pages/RegisterPage/components/RegisterCard.vue'
 </script>
 
 <template>
-  <div class="min-h-screen relative flex items-center justify-end overflow-hidden">
+  <div class="h-screen relative flex items-center justify-center overflow-hidden">
     <!-- Background Image with Overlay -->
     <div
       class="absolute inset-0 bg-cover bg-center"
@@ -12,8 +12,8 @@ import RegisterCard from '@/pages/RegisterPage/components/RegisterCard.vue'
       <div class="absolute inset-0 bg-black/40"></div>
     </div>
 
-    <!-- Registration Card Container - Right Side -->
-    <div class="relative z-10 w-full max-w-md mr-8 lg:mr-16 xl:mr-24">
+    <!-- Registration Card Container - Centered -->
+    <div class="relative z-10 w-full max-w-5xl px-4 max-h-[calc(100vh-4rem)]">
       <RegisterCard />
     </div>
   </div>
