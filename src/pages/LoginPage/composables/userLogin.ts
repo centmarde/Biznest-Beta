@@ -40,7 +40,7 @@ export function useLogin() {
 
     const goToSignUp = () => {
         console.log('Go to sign up clicked')
-        router.push('/register')
+        router.push('/signup')
     }
 
     return {

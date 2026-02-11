@@ -49,7 +49,7 @@ export function useRegister() {
 
   const goToLogin = () => {
     console.log('Go to login clicked')
-    router.push('/login')
+    router.push('/signin')
   }
 
   return {
