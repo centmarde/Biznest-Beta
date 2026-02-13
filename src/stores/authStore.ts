@@ -18,6 +18,12 @@ interface LoginCredentials {
   password: string
 }
 
+interface RegisterCredentials {
+  name: string
+  email: string
+  password: string
+}
+
 export const useAuthStore = defineStore('auth', () => {
   // State - using ref()
   const user = ref<User | null>(null)
@@ -86,6 +92,59 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem('authUser')
   }
 
+  const register = async (credentials: RegisterCredentials): Promise<boolean> => {
+    isLoading.value = true
+    error.value = null
+
+    try {
+      // Check if user already exists
+      const { data: existingUsers } = await axios.get<User[]>('/users', {
+        params: {
+          email: credentials.email
+        }
+      })
+
+      if (existingUsers.length > 0) {
+        throw new Error('An account with this email already exists')
+      }
+
+      // Create new user
+      const { data: newUser } = await axios.post<User>('/users', {
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password
+      })
+
+      // Auto-login after registration
+      const loginToken = `jwt-token-${Date.now()}`
+      const { data: loginData } = await axios.post<LoginResponse>('/login', {
+        user: newUser,
+        token: loginToken
+      })
+
+      // Store user and token
+      user.value = loginData.user
+      token.value = loginData.token
+
+      // Persist to localStorage
+      localStorage.setItem('authToken', loginData.token)
+      localStorage.setItem('authUser', JSON.stringify(loginData.user))
+
+      return true
+    } catch (err: any) {
+      if (err.message === 'An account with this email already exists') {
+        error.value = err.message
+      } else {
+        error.value = err.message || 'Registration failed. Please try again.'
+      }
+      user.value = null
+      token.value = null
+      return false
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   const checkAuth = (): boolean => {
     const storedToken = localStorage.getItem('authToken')
     const storedUser = localStorage.getItem('authUser')
@@ -127,6 +186,7 @@ export const useAuthStore = defineStore('auth', () => {
     userEmail,
     // Functions
     login,
+    register,
     logout,
     checkAuth,
     clearError,

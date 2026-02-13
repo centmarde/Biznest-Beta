@@ -1,5 +1,5 @@
 <template>
-  <Card class="w-full mx-auto max-h-full overflow-hidden">
+    <Card class="w-full mx-auto max-h-full overflow-hidden">
     <CardHeader class="text-center pb-2 pt-4">
       <CardTitle class="text-xl font-bold">Create Account</CardTitle>
       <CardDescription class="text-xs">Join Biznest to start connecting with business opportunities</CardDescription>

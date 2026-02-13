@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
 
 export interface User {
   id: number,
@@ -10,6 +11,7 @@ export interface User {
 
 export function useRegister() {
   const router = useRouter()
+  const authStore = useAuthStore()
 
   const fullName = ref('')
   const email = ref('')
@@ -18,24 +20,40 @@ export function useRegister() {
   const agreeToTerms = ref(false)
 
   const register = async () => {
+    // Clear any previous errors
+    authStore.clearError()
+
     // Validation
     if (password.value !== confirmPassword.value) {
-      console.error('Passwords do not match')
+      alert('Passwords do not match')
       return
     }
 
     if (!agreeToTerms.value) {
-      console.error('You must agree to the terms and conditions')
+      alert('You must agree to the terms and conditions')
       return
     }
 
-    console.log('Email registration:', {
-      fullName: fullName.value,
+    // Validate password strength (optional)
+    if (password.value.length < 6) {
+      alert('Password must be at least 6 characters long')
+      return
+    }
+
+    const success = await authStore.register({
+      name: fullName.value,
       email: email.value,
-      password: password.value,
-      agreeToTerms: agreeToTerms.value
+      password: password.value
     })
-    // Implement registration logic here
+
+    if (success) {
+      console.log('Registration successful!')
+      // Redirect to home page after successful registration
+      router.push('/home')
+    } else {
+      console.error('Registration failed:', authStore.error)
+      alert(authStore.error || 'Registration failed')
+    }
   }
 
   // OAuth registration methods
