@@ -3,12 +3,22 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "vue-router";
+import { useAuthStore } from '@/stores/authStore';
 
 const routes: RouteRecordRaw[] = [
     {
         path: "/",
         name: "Landing",
         component: () => import('@/pages/LandingPage/LandingView.vue'),
+    },
+    {
+        path: '/home',
+        name: 'home',
+        component: () => import('@/pages/HomePage/HomeView.vue'),
+        meta: {
+            title: 'Home',
+            guard: 'auth'
+        }
     },
    {
         path: '/signin',
@@ -55,6 +65,26 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// Navigation guards
+router.beforeEach((to, _from, next) => {
+  const authStore = useAuthStore();
+  const isAuthenticated = authStore.isAuthenticated;
+
+  // Check if the route requires authentication
+  if (to.meta.guard === 'auth' && !isAuthenticated) {
+    // Redirect to login if not authenticated
+    next({ name: 'login' });
+  }
+  // Check if the route is for guests only (like login/register)
+  else if (to.meta.guard === 'guest' && isAuthenticated) {
+    // Redirect to home if already authenticated
+    next({ name: 'home' });
+  }
+  else {
+    next();
+  }
 });
 
 export default router;

@@ -1,16 +1,48 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "John Doe",
-            "email": "Test@gmail.com",
-            "password": "Test123!"
-        },
-        {
-            "id": 2,
-            "name": "Jane Smith",
-            "email": "Sample@gmail.com",
-            "password": "Test123!"
-        }
-    ]
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "Test@gmail.com",
+      "password": "Test123!"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "Sample@gmail.com",
+      "password": "Test123!"
+    }
+  ],
+  "login": [
+    {
+      "user": {
+        "id": 1,
+        "name": "John Doe",
+        "email": "Test@gmail.com",
+        "password": "Test123!"
+      },
+      "token": "jwt-token",
+      "id": "f683"
+    },
+    {
+      "user": {
+        "id": 2,
+        "name": "Jane Smith",
+        "email": "Sample@gmail.com",
+        "password": "Test123!"
+      },
+      "token": "jwt-token",
+      "id": "291b"
+    },
+    {
+      "id": "a2b8",
+      "user": {
+        "id": "1",
+        "name": "John Doe",
+        "email": "Test@gmail.com",
+        "password": "Test123!"
+      },
+      "token": "jwt-token-1771010646513"
+    }
+  ]
 }
