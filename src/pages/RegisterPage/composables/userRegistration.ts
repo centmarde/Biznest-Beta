@@ -1,6 +1,13 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+export interface User {
+  id: number,
+  name: string,
+  password: string,
+  email: string
+}
+
 export function useRegister() {
   const router = useRouter()
 

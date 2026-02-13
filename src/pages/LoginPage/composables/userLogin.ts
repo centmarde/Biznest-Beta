@@ -1,19 +1,33 @@
 import { ref } from "vue"
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
 
 export function useLogin() {
     const router = useRouter()
+    const authStore = useAuthStore()
 
     const email = ref('')
     const password = ref('')
     const rememberMe = ref(false)
 
     const login = async () => {
-        console.log('Email login:', {
+        // Clear any previous errors
+        authStore.clearError()
+
+        const success = await authStore.login({
             email: email.value,
-            password: password.value,
-            rememberMe: rememberMe.value
+            password: password.value
         })
+
+        if (success) {
+            console.log('Login successful!')
+            // Redirect to home page after successful login
+            router.push('/home')
+        } else {
+            console.error('Login failed:', authStore.error)
+            // You can show a toast notification or alert here
+            alert(authStore.error || 'Login failed')
+        }
     }
 
     // OAuth login methods
