@@ -11,6 +11,12 @@
       "name": "Jane Smith",
       "email": "Sample@gmail.com",
       "password": "Test123!"
+    },
+    {
+      "id": "37c1",
+      "name": "John Paul Pracullos",
+      "email": "pracullos@gmail.com",
+      "password": "Password123"
     }
   ],
   "login": [
@@ -43,6 +49,16 @@
         "password": "Test123!"
       },
       "token": "jwt-token-1771010646513"
+    },
+    {
+      "id": "4a5a",
+      "user": {
+        "id": "37c1",
+        "name": "John Paul Pracullos",
+        "email": "pracullos@gmail.com",
+        "password": "Password123"
+      },
+      "token": "jwt-token-1771011011146"
     }
   ]
 }
