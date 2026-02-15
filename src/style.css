@@ -2,16 +2,24 @@
 @import "tw-animate-css";
 
 @font-face {
-  font-family: "Agrandir";
-  src: url("/fonts/Agrandir-Regular.otf") format("opentype");
+  font-family: "Lora";
+  src: url("/fonts/Lora-VariableFont_wght.ttf") format("opentype");
   font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Givonic";
+  src: url("/fonts/Givonic-Regular.otf") format("opentype");
+  font-weight: 400;
   font-style: normal;
 }
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Agrandir", sans-serif;
+  --font-sans: "Lora", serif;
+  --font-heading: "Givonic", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

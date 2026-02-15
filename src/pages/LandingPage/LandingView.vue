@@ -18,7 +18,7 @@ import FeatureGrid from "./components/FeatureGrid.vue";
         >
           <!-- Left Side: Text Content -->
           <div class="text-left order-2 lg:order-1 ml-10">
-            <TypographyH1>
+            <TypographyH1 class="font-heading">
               Find your perfect<br />location effortlessly.
             </TypographyH1>
 
