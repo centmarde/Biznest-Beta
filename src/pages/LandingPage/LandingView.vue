@@ -9,9 +9,9 @@ import FeatureGrid from "./components/FeatureGrid.vue";
   <OuterLayout>
     <template #content>
       <div
-        class="relative w-full min-h-[50vh] bg-background flex flex-col items-center justify-start overflow-hidden pt-12"
+        class="relative w-full min-h-screen bg-background flex flex-col items-center justify-start overflow-hidden pt-12"
       >
-        <div class="text-center max-w-4xl px-6">
+        <div class="relative z-10 text-center max-w-4xl px-6">
           <TypographyP class="mx-auto max-w-2xl">
             An AI-powered system that helps choose business locations and
             connects local businesses in your city
@@ -30,9 +30,18 @@ import FeatureGrid from "./components/FeatureGrid.vue";
             </TypographyH1>
           </div>
         </div>
+
+        <div
+          class="absolute bottom-0 w-full z-0 translate-y-24 md:translate-y-30"
+        >
+          <img
+            src="/landing.png"
+            alt="Landing Image"
+            class="w-full h-auto opacity-50 rounded-t-3xl shadow-2xl border-t border-white/10"
+          />
+        </div>
       </div>
 
-      <!-- Feature Grid Section -->
       <FeatureGrid />
     </template>
   </OuterLayout>
