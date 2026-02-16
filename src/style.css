@@ -9,10 +9,48 @@
 }
 
 @font-face {
+  font-family: "Oswald";
+  src: url("/fonts/Oswald-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Utility class for Oswald Bold */
+.oswald-bold {
+  font-family: "Oswald", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 5rem;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Utility class for Montserrat SemiBold */
+.montserrat-semibold {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 600;
+}
+
+/* @font-face {
   font-family: "Givonic";
   src: url("/fonts/Givonic-Regular.otf") format("opentype");
-  font-weight: 400;
+  font-weight: normal;
   font-style: normal;
+} */
+
+/* Thicker text stroke utility class for Givonic font */
+.givonic-thick-stroke {
+  font-family: "Givonic", sans-serif;
+  -webkit-text-stroke: 2px black;
+  text-stroke: 2px black;
+  /* Optional: make text bolder */
+  font-weight: bold;
 }
 
 @custom-variant dark (&:is(.dark *));

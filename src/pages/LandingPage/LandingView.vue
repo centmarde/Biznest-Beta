@@ -16,9 +16,19 @@ import FeatureGrid from "./components/FeatureGrid.vue";
             An AI-powered system that helps choose business locations and
             connects local businesses in your city
           </TypographyP>
-          <TypographyH1 class="font-heading mb-6">
-            Find your perfect<br />location effortlessly.
-          </TypographyH1>
+
+          <img
+            src="/logo.png"
+            alt="Logo"
+            class="hidden md:block h-90 w-auto mx-auto -my-18"
+          />
+
+          <div class="flex flex-col gap-2">
+            <TypographyH1 class="oswald-bold"> CHOOSE IDEAL </TypographyH1>
+            <TypographyH1 class="montserrat-semibold tracking-widest">
+              LOCATION INSTANTLY
+            </TypographyH1>
+          </div>
         </div>
       </div>
 
