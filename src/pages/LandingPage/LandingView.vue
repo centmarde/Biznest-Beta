@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import OuterLayout from "@/layout/OuterLayout.vue";
 import TypographyH1 from "@/components/ui/typography/TypographyH1.vue";
-import TypographyP from "@/components/ui/typography/TypographyP.vue";
 import FeatureGrid from "./components/FeatureGrid.vue";
+import TypographyP from "@/components/ui/typography/TypographyP.vue";
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import FeatureGrid from "./components/FeatureGrid.vue";
         class="relative w-full min-h-screen bg-background flex flex-col items-center justify-start overflow-hidden pt-12"
       >
         <div class="relative z-10 text-center max-w-4xl px-6">
-          <TypographyP class="mx-auto max-w-2xl">
+          <TypographyP>
             An AI-powered system that helps choose business locations and
             connects local businesses in your city
           </TypographyP>
