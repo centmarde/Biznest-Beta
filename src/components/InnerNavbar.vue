@@ -1,13 +1,22 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import ModeToggle from "@/components/ModeToggle.vue";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuthStore } from "@/stores/authStore";
 import TypographyH3 from "./ui/typography/TypographyH3.vue";
 import { Mail, Bell } from "lucide-vue-next";
 
 const router = useRouter();
+const authStore = useAuthStore();
 const isMobileMenuOpen = ref(false);
+
+const userInitials = computed(() => {
+  const name = authStore.userName;
+  if (!name) return 'U';
+  return name.split(' ').map((n: string) => n[0]).join('').toUpperCase().substring(0, 2);
+});
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
@@ -49,12 +58,10 @@ const navigateTo = (path: string) => {
           <ModeToggle />
           <Mail />
           <Bell />
-          <Button
-            @click="navigateTo('/signup')"
-            class="bg-prof-gold hover:bg-prof-gold/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
-          >
-            Get Started
-          </Button>
+          <Avatar class="cursor-pointer" @click="navigateTo('/profile')">
+            <AvatarImage :src="authStore.user?.avatar || ''" :alt="authStore.userName || 'User'" />
+            <AvatarFallback>{{ userInitials }}</AvatarFallback>
+          </Avatar>
         </div>
 
         <!-- Mobile Menu Button -->
