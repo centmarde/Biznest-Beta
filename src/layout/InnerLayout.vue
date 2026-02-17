@@ -4,13 +4,15 @@ import Sidebar from "@/components/Sidebar.vue";
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex min-h-screen flex-col">
     <InnerNavbar />
-    <main class="flex-1">
-      <slot name="content"></slot>
-    </main>
-    <Sidebar />
+    <div class="flex flex-1">
+      <aside class="hidden w-64 flex-col border-r bg-background md:flex">
+        <Sidebar class="flex-1" />
+      </aside>
+      <main class="flex-1 p-6">
+        <slot name="content"></slot>
+      </main>
+    </div>
   </div>
 </template>
-
-<style scoped></style>
