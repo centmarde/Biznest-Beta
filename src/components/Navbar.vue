@@ -21,7 +21,7 @@ const navigateTo = (path: string) => {
   <nav
     class="bg-background/90 border-b border-prof-navy/10 sticky top-0 z-50 backdrop-blur-sm"
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
         <div class="flex-shrink-0 flex items-center">
@@ -31,42 +31,10 @@ const navigateTo = (path: string) => {
             class="hover:no-underline p-0 h-auto"
           >
             <img
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Biznest Logo"
-              class="h-10 w-auto rounded-full"
+              class="h-25 w-auto rounded-full"
             />
-          </Button>
-        </div>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex md:items-center md:space-x-8">
-          <Button
-            variant="ghost"
-            @click="navigateTo('/')"
-            class="text-foreground hover:text-foreground/90 text-sm font-medium transition-colors hover:bg-transparent px-0 h-auto"
-          >
-            Home
-          </Button>
-          <Button
-            variant="ghost"
-            @click="navigateTo('/about')"
-            class="text-foreground hover:text-foreground/90 text-sm font-medium transition-colors hover:bg-transparent px-0 h-auto"
-          >
-            About
-          </Button>
-          <Button
-            variant="ghost"
-            @click="navigateTo('/features')"
-            class="text-foreground hover:text-foreground/90 text-sm font-medium transition-colors hover:bg-transparent px-0 h-auto"
-          >
-            Features
-          </Button>
-          <Button
-            variant="ghost"
-            @click="navigateTo('/contact')"
-            class="text-foreground hover:text-foreground/90 text-sm font-medium transition-colors hover:bg-transparent px-0 h-auto"
-          >
-            Contact
           </Button>
         </div>
 

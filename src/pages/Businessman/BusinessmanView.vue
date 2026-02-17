@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import BusinessNavbar from './components/BusinessNavbar.vue'
 import SideNav from './components/SideNav.vue'
 import ProfileWelcome from './components/ProfileWelcome.vue'
 import TileOption from './components/TileOption.vue'
