@@ -21,14 +21,6 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: "/admin",
-    name: "admin",
-    component: () => import("@/pages/AdminPage/AdminView.vue"),
-    meta: {
-      title: "Admin",
-    },
-  },
-  {
     path: "/signin",
     name: "login",
     component: () => import("@/pages/LoginPage/Login.vue"),
