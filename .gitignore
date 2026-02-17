@@ -25,3 +25,6 @@ dist-ssr
 
 # Instructions
 .github
+
+# Environment variables
+.env
