@@ -1,69 +1,47 @@
 <script setup lang="ts">
 import OuterLayout from "@/layout/OuterLayout.vue";
 import TypographyH1 from "@/components/ui/typography/TypographyH1.vue";
-import TypographyList from "@/components/ui/typography/TypographyList.vue";
-import TypographyP from "@/components/ui/typography/TypographyP.vue";
-import { Card } from "@/components/ui/card";
 import FeatureGrid from "./components/FeatureGrid.vue";
+import TypographyP from "@/components/ui/typography/TypographyP.vue";
 </script>
 
 <template>
   <OuterLayout>
     <template #content>
       <div
-        class="relative w-full min-h-screen bg-background flex items-center overflow-hidden"
+        class="relative w-full min-h-screen bg-background flex flex-col items-center justify-start overflow-hidden pt-12"
       >
-        <div
-          class="pl-6 md:pl-12 pr-0 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full py-12"
-        >
-          <!-- Left Side: Text Content -->
-          <div class="text-left order-2 lg:order-1 ml-10">
-            <TypographyH1>
-              Find your perfect<br />location effortlessly.
+        <div class="relative z-10 text-center max-w-4xl px-6">
+          <TypographyP>
+            An AI-powered system that helps choose business locations and
+            connects local businesses in your city
+          </TypographyP>
+
+          <img
+            src="/logo.png"
+            alt="Logo"
+            class="hidden md:block h-90 w-auto mx-auto -my-18"
+          />
+
+          <div class="flex flex-col gap-2">
+            <TypographyH1 class="oswald-bold"> CHOOSE IDEAL </TypographyH1>
+            <TypographyH1 class="montserrat-semibold tracking-widest">
+              LOCATION INSTANTLY
             </TypographyH1>
-
-            <TypographyList>
-              <li>AI-powered location matching</li>
-              <li>Advanced analytics and reporting</li>
-              <li>Seamless management platform</li>
-            </TypographyList>
-
-            <TypographyP>
-              Leverage real-time data and predictive models to identify the most
-              promising opportunities for your business growth. Reduce risks and
-              maximize ROI with our comprehensive location intelligence suite.
-            </TypographyP>
           </div>
+        </div>
 
-          <!-- Right Side: Image Layers -->
-          <div
-            class="relative w-full h-[600px] md:h-[600px] flex items-center justify-end order-1 lg:order-2"
-          >
-            <!-- Layer 1: Back Card (Primary Color) - Large, Right side, Vertically centered -->
-            <Card
-              class="absolute right-0 top-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-prof-navy dark:bg-primary border-none shadow-none z-0 rounded-l-3xl rounded-r-none"
-            />
-
-            <!-- Layer 2: Middle Card (Background Color) - Smaller, Right side (inside Layer 1), Vertically centered -->
-            <Card
-              class="absolute right-0 top-1/2 -translate-y-1/2 w-[95%] h-[85%] bg-background border shadow-xl z-10 rounded-l-2xl rounded-r-none"
-            />
-
-            <!-- Layer 3: Image (Large, Centered on Layer 2) -->
-            <div
-              class="absolute right-0 top-1/2 -translate-y-1/2 w-full h-full z-20 flex items-center justify-center"
-            >
-              <img
-                src="/landing.png"
-                alt="Platform Preview"
-                class="w-full h-full object-contain drop-shadow-2xl"
-              />
-            </div>
-          </div>
+        <div
+          class="absolute bottom-0 w-full z-0 translate-y-24 md:translate-y-30"
+        >
+          <img
+            src="/landing.png"
+            alt="Landing Image"
+            class="w-full h-auto opacity-50 rounded-t-3xl shadow-2xl border-t border-white/10"
+          />
         </div>
       </div>
 
-      <!-- Feature Grid Section -->
       <FeatureGrid />
     </template>
   </OuterLayout>
