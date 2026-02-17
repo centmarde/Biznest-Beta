@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/authStore'
+import { useAlert } from '@/components/AlertContext.vue'
 
 export interface User {
   id: number,
@@ -12,6 +13,7 @@ export interface User {
 export function useRegister() {
   const router = useRouter()
   const authStore = useAuthStore()
+  const { addAlert } = useAlert()
 
   const fullName = ref('')
   const email = ref('')
@@ -25,18 +27,30 @@ export function useRegister() {
 
     // Validation
     if (password.value !== confirmPassword.value) {
-      alert('Passwords do not match')
+      addAlert({
+        title: 'Validation Error',
+        description: 'Passwords do not match.',
+        variant: 'destructive'
+      })
       return
     }
 
     if (!agreeToTerms.value) {
-      alert('You must agree to the terms and conditions')
+      addAlert({
+        title: 'Terms Required',
+        description: 'You must agree to the terms and conditions.',
+        variant: 'destructive'
+      })
       return
     }
 
     // Validate password strength (optional)
     if (password.value.length < 6) {
-      alert('Password must be at least 6 characters long')
+      addAlert({
+        title: 'Weak Password',
+        description: 'Password must be at least 6 characters long.',
+        variant: 'destructive'
+      })
       return
     }
 
@@ -48,11 +62,20 @@ export function useRegister() {
 
     if (success) {
       console.log('Registration successful!')
+      addAlert({
+        title: 'Welcome!',
+        description: 'Registration successful. Redirecting...',
+        variant: 'success'
+      })
       // Redirect to home page after successful registration
       router.push('/home')
     } else {
       console.error('Registration failed:', authStore.error)
-      alert(authStore.error || 'Registration failed')
+      addAlert({
+        title: 'Registration Failed',
+        description: authStore.error || 'An error occurred during registration.',
+        variant: 'destructive'
+      })
     }
   }
 
