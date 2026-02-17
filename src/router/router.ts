@@ -20,15 +20,6 @@ const routes: RouteRecordRaw[] = [
             guard: 'auth'
         }
     },
-    {
-        path: '/business-owner',
-        name: 'business-owner',
-        component: () => import('@/pages/BusinessOwnerPage/BusinessOwnerView.vue'),
-        meta: {
-            title: 'Business Owner Dashboard',
-           /*  guard: 'auth' */
-        }
-    },
    {
         path: '/signin',
         name: 'login',
@@ -46,6 +37,24 @@ const routes: RouteRecordRaw[] = [
         meta: {
             title: 'User Registration',
             guard: 'guest'
+        }
+    },
+     {
+        path: '/business-owner',
+        name: 'business-owner',
+        component: () => import('@/pages/BusinessOwnerPage/BusinessOwnerView.vue'),
+        meta: {
+            title: 'Business Owner Dashboard',
+           /*  guard: 'auth' */
+        }
+    },
+    {
+        path: '/business-owner/pick-location',
+        name: 'gmap-location-picker',
+        component: () => import('@/pages/BusinessOwnerPage/GmapPickLocationView.vue'),
+        meta: {
+            title: 'Pick Your Location',
+          /*   guard: 'auth' */
         }
     },
     // Error Pages

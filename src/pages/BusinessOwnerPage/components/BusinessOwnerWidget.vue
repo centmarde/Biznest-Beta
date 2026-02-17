@@ -3,12 +3,12 @@ import { TypographyH1, TypographyH3, TypographyP } from "@/components/ui/typogra
 
 // Define emit events for parent component
 const emit = defineEmits<{
-  optionSelected: [option: 'have-lot' | 'have-business' | 'need-space' | 'need-supplier']
+  'option-selected': [option: 'have-lot' | 'have-business' | 'need-space' | 'need-supplier']
 }>()
 
 // Handle option selection
 const selectOption = (option: 'have-lot' | 'have-business' | 'need-space' | 'need-supplier') => {
-  emit('optionSelected', option)
+  emit('option-selected', option)
 }
 </script>
 

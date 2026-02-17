@@ -1,17 +1,33 @@
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { TypographyH3, TypographyP } from "@/components/ui/typography"
+import { useRouter } from 'vue-router'
 import BusinessOwnerWidget from './components/BusinessOwnerWidget.vue'
 
-// State for selected option
-const selectedOption = ref<'have-lot' | 'have-business' | 'need-space' | 'need-supplier' | null>(null)
+// Router for navigation
+const router = useRouter()
 
 // Handle option selection from widget
 const handleOptionSelection = (option: 'have-lot' | 'have-business' | 'need-space' | 'need-supplier') => {
-  selectedOption.value = option
   console.log('Selected business option:', option)
-  // Here you can add navigation logic or other actions based on the selection
+  console.log('Option label:', getOptionLabel(option))
+  
+  // Navigate based on option type
+  if (option === 'have-lot' || option === 'need-space' || option === 'have-business') {
+    // Navigate to the map location picker for location-related options
+    router.push({ 
+      name: 'gmap-location-picker',
+      query: { businessType: option }
+    })
+  } else if (option === 'need-supplier') {
+    // Navigate to supplier search/location picker to find suppliers nearby
+    router.push({ 
+      name: 'gmap-location-picker',
+      query: { businessType: option, mode: 'supplier-search' }
+    })
+  } else {
+    // Fallback for any future options
+    console.log('Option selected, implement specific flow for:', option)
+  }
 }
 
 // Helper function to get option label
@@ -31,14 +47,6 @@ const getOptionLabel = (option: string): string => {
     <div class="container mx-auto py-8">
       <!-- Business Owner Widget -->
       <BusinessOwnerWidget @option-selected="handleOptionSelection" />
-      
-      <!-- Selected Option Display (for demonstration) -->
-      <div v-if="selectedOption" class="mt-8 text-center">
-        <div class="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
-          <TypographyH3 class="text-lg font-semibold text-prof-navy mb-2">Selected Option:</TypographyH3>
-          <TypographyP class="text-prof-charcoal">{{ getOptionLabel(selectedOption) }}</TypographyP>
-        </div>
-      </div>
     </div>
   </div>
 </template>
