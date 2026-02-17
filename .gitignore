@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 # Instructions
-.github
+# .github
 
 # Environment variables
 .env
