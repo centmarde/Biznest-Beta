@@ -6,18 +6,22 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "start:server": "npx json-server public/data/user.json --host localhost --port 8080",
     "preview": "vite preview",
     "prepare": "husky",
     "type-check": "vue-tsc --noEmit",
     "type-check:src": "vue-tsc --noEmit --project tsconfig.app.json",
+    "type-check:staged": "vue-tsc --noEmit --project tsconfig.app.json",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/vue-table": "^8.21.3",
     "@vueuse/core": "^14.2.0",
+    "axios": "^1.13.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "json-server": "^1.0.0-beta.5",
     "lucide-vue-next": "^0.562.0",
     "pinia": "^3.0.4",
     "reka-ui": "^2.8.0",

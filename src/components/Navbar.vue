@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import ModeToggle from "@/components/ModeToggle.vue";
+import { Button } from "@/components/ui/button";
 
 const router = useRouter();
 const isMobileMenuOpen = ref(false);
@@ -18,64 +19,43 @@ const navigateTo = (path: string) => {
 
 <template>
   <nav
-    class="bg-background/90 border-b border-[#0A2540]/10 sticky top-0 z-50 backdrop-blur-sm"
+    class="bg-background/90 border-b border-prof-navy/10 sticky top-0 z-50 backdrop-blur-sm"
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
         <div class="flex-shrink-0 flex items-center">
-          <button
+          <Button
+            variant="link"
             @click="navigateTo('/')"
-            class="text-2xl font-bold text-foreground hover:text-foreground/90 transition-colors"
+            class="hover:no-underline p-0 h-auto"
           >
-            Biznest
-          </button>
-        </div>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex md:items-center md:space-x-8">
-          <button
-            @click="navigateTo('/')"
-            class="text-foreground hover:text-foreground/90 text-sm font-medium transition-colors"
-          >
-            Home
-          </button>
-          <button
-            @click="navigateTo('/about')"
-            class="text-foreground hover:text-foreground/90 text-sm font-medium transition-colors"
-          >
-            About
-          </button>
-          <button
-            @click="navigateTo('/features')"
-            class="text-foreground hover:text-foreground/90 text-sm font-medium transition-colors"
-          >
-            Features
-          </button>
-          <button
-            @click="navigateTo('/contact')"
-            class="text-foreground hover:text-foreground/90 text-sm font-medium transition-colors"
-          >
-            Contact
-          </button>
+            <img
+              src="/logo.png"
+              alt="Biznest Logo"
+              class="h-25 w-auto rounded-full"
+            />
+          </Button>
         </div>
 
         <!-- Desktop Auth Buttons -->
         <div class="hidden md:flex md:items-center md:space-x-4">
           <ModeToggle />
-          <button
+          <Button
             @click="navigateTo('/signup')"
-            class="bg-[#C9A24D] hover:bg-[#C9A24D]/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
+            class="bg-prof-gold hover:bg-prof-gold/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
           >
             Get Started
-          </button>
+          </Button>
         </div>
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden">
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             @click="toggleMobileMenu"
-            class="text-foreground/90 hover:text-foreground transition-colors p-2"
+            class="text-foreground/90 hover:text-foreground transition-colors"
             aria-label="Toggle menu"
           >
             <svg
@@ -106,7 +86,7 @@ const navigateTo = (path: string) => {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-          </button>
+          </Button>
         </div>
       </div>
     </div>
@@ -114,44 +94,48 @@ const navigateTo = (path: string) => {
     <!-- Mobile Menu -->
     <div
       v-if="isMobileMenuOpen"
-      class="md:hidden bg-[#0A2540] border-t border-white/10"
+      class="md:hidden bg-prof-navy border-t border-white/10"
     >
       <div class="px-4 pt-2 pb-3 space-y-1">
-        <button
+        <Button
+          variant="ghost"
           @click="navigateTo('/')"
-          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors"
+          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors h-auto justify-start"
         >
           Home
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="ghost"
           @click="navigateTo('/about')"
-          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors"
+          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors h-auto justify-start"
         >
           About
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="ghost"
           @click="navigateTo('/features')"
-          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors"
+          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors h-auto justify-start"
         >
           Features
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="ghost"
           @click="navigateTo('/contact')"
-          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors"
+          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors h-auto justify-start"
         >
           Contact
-        </button>
+        </Button>
       </div>
       <div class="px-4 py-3 border-t border-white/10 space-y-2">
         <div class="flex justify-center pb-2">
           <ModeToggle />
         </div>
-        <button
+        <Button
           @click="navigateTo('/signup')"
-          class="block w-full text-center bg-prof-gold hover:bg-[#C9A24D]/90 text-foreground px-3 py-2 rounded-md text-base font-medium transition-colors"
+          class="block w-full text-center bg-prof-gold hover:bg-prof-gold/90 text-foreground px-3 py-2 rounded-md text-base font-medium transition-colors h-auto"
         >
           Get Started
-        </button>
+        </Button>
       </div>
     </div>
   </nav>
