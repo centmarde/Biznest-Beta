@@ -20,6 +20,15 @@ const routes: RouteRecordRaw[] = [
             guard: 'auth'
         }
     },
+    {
+        path: '/business-owner',
+        name: 'business-owner',
+        component: () => import('@/pages/BusinessOwnerPage/BusinessOwnerView.vue'),
+        meta: {
+            title: 'Business Owner Dashboard',
+           /*  guard: 'auth' */
+        }
+    },
    {
         path: '/signin',
         name: 'login',
