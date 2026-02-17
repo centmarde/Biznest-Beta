@@ -1,79 +1,92 @@
 <script lang="ts">
-import { inject, type InjectionKey } from 'vue'
+import { inject, type InjectionKey } from "vue";
 
 export interface AlertData {
-  id: string
-  title: string
-  description?: string
-  variant?: 'default' | 'destructive' | 'success'
-  duration?: number
+  id: string;
+  title: string;
+  description?: string;
+  variant?: "default" | "destructive" | "success";
+  duration?: number;
 }
 
 export type AlertContextType = {
-  addAlert: (alert: Omit<AlertData, 'id'>) => void
-  removeAlert: (id: string) => void
-}
+  addAlert: (alert: Omit<AlertData, "id">) => void;
+  removeAlert: (id: string) => void;
+};
 
-export const AlertContextKey = Symbol('AlertContext') as InjectionKey<AlertContextType>
+export const AlertContextKey = Symbol(
+  "AlertContext",
+) as InjectionKey<AlertContextType>;
 
 export function useAlert() {
-  const context = inject(AlertContextKey)
+  const context = inject(AlertContextKey);
   if (!context) {
-    throw new Error('useAlert must be used within an AlertContext')
+    throw new Error("useAlert must be used within an AlertContext");
   }
-  return context
+  return context;
 }
 </script>
 
 <script setup lang="ts">
-import { ref, provide } from 'vue'
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
-import { X, AlertCircle, CheckCircle2, Info } from 'lucide-vue-next'
+import { ref, provide } from "vue";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { X, AlertCircle, CheckCircle2, Info } from "lucide-vue-next";
 
-const alerts = ref<AlertData[]>([])
+const alerts = ref<AlertData[]>([]);
 
-const addAlert = (alert: Omit<AlertData, 'id'>) => {
-  const id = Math.random().toString(36).substring(2, 9)
+const addAlert = (alert: Omit<AlertData, "id">) => {
+  const id = Math.random().toString(36).substring(2, 9);
   const newAlert: AlertData = {
     ...alert,
     id,
-    duration: alert.duration ?? 5000, 
-  }
-  
-  alerts.value.push(newAlert)
+    duration: alert.duration ?? 5000,
+  };
+
+  alerts.value.push(newAlert);
 
   if (newAlert.duration && newAlert.duration > 0) {
     setTimeout(() => {
-      removeAlert(id)
-    }, newAlert.duration)
+      removeAlert(id);
+    }, newAlert.duration);
   }
-}
+};
 
 const removeAlert = (id: string) => {
-  alerts.value = alerts.value.filter((a) => a.id !== id)
-}
+  alerts.value = alerts.value.filter((a) => a.id !== id);
+};
 
 provide(AlertContextKey, {
   addAlert,
-  removeAlert
-})
+  removeAlert,
+});
 </script>
 
 <template>
   <slot />
-  
+
   <Teleport to="body">
-    <div class="fixed top-4 right-4 z-[100] flex flex-col gap-2 w-full max-w-sm pointer-events-none">
+    <div
+      class="fixed top-20 right-4 z-[100] flex flex-col gap-2 w-full max-w-sm pointer-events-none"
+    >
       <TransitionGroup name="alert-slide">
         <div
           v-for="alert in alerts"
           :key="alert.id"
           class="pointer-events-auto w-full transition-all duration-300 ease-in-out"
         >
-          <Alert :variant="alert.variant" class="relative shadow-lg bg-background border">
-            <component 
-              :is="alert.variant === 'destructive' ? AlertCircle : (alert.variant === 'success' ? CheckCircle2 : Info)" 
-              class="h-4 w-4" 
+          <Alert
+            :variant="alert.variant"
+            class="relative shadow-lg bg-background border"
+          >
+            <component
+              :is="
+                alert.variant === 'destructive'
+                  ? AlertCircle
+                  : alert.variant === 'success'
+                    ? CheckCircle2
+                    : Info
+              "
+              class="h-4 w-4"
             />
             <AlertTitle class="mb-1 font-semibold pr-6">
               {{ alert.title }}
@@ -88,15 +101,21 @@ provide(AlertContextKey, {
               <X class="h-4 w-4" />
               <span class="sr-only">Close</span>
             </button>
-            <div 
+            <div
               v-if="alert.duration && alert.duration > 0"
               class="absolute bottom-0 left-0 h-1 w-full bg-muted overflow-hidden rounded-b-lg"
             >
-               <div 
-                 class="h-full progress-bar"
-                 :class="[alert.variant === 'destructive' ? 'bg-destructive' : (alert.variant === 'success' ? 'bg-success' : 'bg-primary')]"
-                 :style="{ animationDuration: `${alert.duration}ms` }"
-               ></div>
+              <div
+                class="h-full progress-bar"
+                :class="[
+                  alert.variant === 'destructive'
+                    ? 'bg-destructive'
+                    : alert.variant === 'success'
+                      ? 'bg-success'
+                      : 'bg-primary',
+                ]"
+                :style="{ animationDuration: `${alert.duration}ms` }"
+              ></div>
             </div>
           </Alert>
         </div>
@@ -107,8 +126,12 @@ provide(AlertContextKey, {
 
 <style scoped>
 @keyframes progress {
-  from { width: 100%; }
-  to { width: 0%; }
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
 }
 
 .progress-bar {
@@ -129,7 +152,7 @@ provide(AlertContextKey, {
 }
 
 .alert-slide-leave-active {
-  position: absolute; 
+  position: absolute;
   /* This ensures smooth removal animation in a list, 
      but might stack weirdly if not handled. 
      Usually TransitionGroup handles it better without absolute if it's a flex col.
