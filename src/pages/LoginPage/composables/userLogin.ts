@@ -1,10 +1,12 @@
 import { ref } from "vue"
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/authStore'
+import { useAlert } from '@/components/AlertContext.vue'
 
 export function useLogin() {
     const router = useRouter()
     const authStore = useAuthStore()
+    const { addAlert } = useAlert()
 
     const email = ref('')
     const password = ref('')
@@ -26,7 +28,11 @@ export function useLogin() {
         } else {
             console.error('Login failed:', authStore.error)
             // You can show a toast notification or alert here
-            alert(authStore.error || 'Login failed')
+            addAlert({
+                title: 'Login Failed',
+                description: authStore.error || 'An error occurred during login.',
+                variant: 'destructive',
+            })
         }
     }
 

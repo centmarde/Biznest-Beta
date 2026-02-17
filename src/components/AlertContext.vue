@@ -5,7 +5,7 @@ export interface AlertData {
   id: string
   title: string
   description?: string
-  variant?: 'default' | 'destructive'
+  variant?: 'default' | 'destructive' | 'success'
   duration?: number
 }
 
@@ -28,7 +28,7 @@ export function useAlert() {
 <script setup lang="ts">
 import { ref, provide } from 'vue'
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
-import { X, AlertCircle, CheckCircle2 } from 'lucide-vue-next'
+import { X, AlertCircle, CheckCircle2, Info } from 'lucide-vue-next'
 
 const alerts = ref<AlertData[]>([])
 
@@ -72,7 +72,7 @@ provide(AlertContextKey, {
         >
           <Alert :variant="alert.variant" class="relative shadow-lg bg-background border">
             <component 
-              :is="alert.variant === 'destructive' ? AlertCircle : CheckCircle2" 
+              :is="alert.variant === 'destructive' ? AlertCircle : (alert.variant === 'success' ? CheckCircle2 : Info)" 
               class="h-4 w-4" 
             />
             <AlertTitle class="mb-1 font-semibold pr-6">
@@ -88,6 +88,16 @@ provide(AlertContextKey, {
               <X class="h-4 w-4" />
               <span class="sr-only">Close</span>
             </button>
+            <div 
+              v-if="alert.duration && alert.duration > 0"
+              class="absolute bottom-0 left-0 h-1 w-full bg-muted overflow-hidden rounded-b-lg"
+            >
+               <div 
+                 class="h-full progress-bar"
+                 :class="[alert.variant === 'destructive' ? 'bg-destructive' : (alert.variant === 'success' ? 'bg-success' : 'bg-primary')]"
+                 :style="{ animationDuration: `${alert.duration}ms` }"
+               ></div>
+            </div>
           </Alert>
         </div>
       </TransitionGroup>
@@ -96,6 +106,17 @@ provide(AlertContextKey, {
 </template>
 
 <style scoped>
+@keyframes progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.progress-bar {
+  animation-name: progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
 .alert-slide-enter-active,
 .alert-slide-leave-active {
   transition: all 0.3s ease;
