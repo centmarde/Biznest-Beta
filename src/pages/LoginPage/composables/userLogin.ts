@@ -1,0 +1,77 @@
+import { ref } from "vue"
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
+import { useAlert } from '@/components/AlertContext.vue'
+
+export function useLogin() {
+    const router = useRouter()
+    const authStore = useAuthStore()
+    const { addAlert } = useAlert()
+
+    const email = ref('')
+    const password = ref('')
+    const rememberMe = ref(false)
+
+    const login = async () => {
+        // Clear any previous errors
+        authStore.clearError()
+
+        const success = await authStore.login({
+            email: email.value,
+            password: password.value
+        })
+
+        if (success) {
+            console.log('Login successful!')
+            // Redirect to home page after successful login
+            router.push('/home')
+        } else {
+            console.error('Login failed:', authStore.error)
+            // You can show a toast notification or alert here
+            addAlert({
+                title: 'Login Failed',
+                description: authStore.error || 'An error occurred during login.',
+                variant: 'destructive',
+            })
+        }
+    }
+
+    // OAuth login methods
+    const loginWithGoogle = () => {
+        console.log('Login with Google')
+        // Implement Google OAuth logic here
+    }
+
+    const loginWithFacebook = () => {
+        console.log('Login with Facebook')
+        // Implement Facebook OAuth logic here
+    }
+
+    const loginWithApple = () => {
+        console.log('Login with Apple')
+        // Implement Apple OAuth logic here
+    }
+
+    // Utility methods
+    const forgotPassword = () => {
+        console.log('Forgot password clicked')
+        // Navigate to forgot password page or show modal
+    }
+
+    const goToSignUp = () => {
+        console.log('Go to sign up clicked')
+        router.push('/signup')
+    }
+
+    return {
+        email,
+        password,
+        rememberMe,
+        login,
+        loginWithGoogle,
+        loginWithApple,
+        loginWithFacebook,
+        forgotPassword,
+        goToSignUp
+    }
+}

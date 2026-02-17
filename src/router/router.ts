@@ -3,68 +3,98 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "vue-router";
-
-import Landing from "@/pages/LandingPage/LandingView.vue";
-
-// Admin Routes
-import DashboardAdmin from "@/pages/admin/admin-dashboard/components/SidebarDashboard.vue";
-import DashboardAnalytics from "@/pages/admin/admin-dashboard/components/SidebarAnalytics.vue";
-import DashboardBusinessOwners from "@/pages/admin/admin-dashboard/components/SidebarBusinessOwners.vue";
-import DashboardProperties from "@/pages/admin/admin-dashboard/components/SidebarProperties.vue";
-import DashboardTransactions from "@/pages/admin/admin-dashboard/components/SidebarTransactions.vue";
-import DashboardSupport from "@/pages/admin/admin-dashboard/components/SidebarSupport.vue";
-import DashboardSettings from "@/pages/admin/admin-dashboard/components/SidebarSettings.vue";
-
-// Businessman Routes
-
-// LGU Routes
+import { useAuthStore } from "@/stores/authStore";
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
     name: "Landing",
-    component: Landing,
+    component: () => import("@/pages/LandingPage/LandingView.vue"),
   },
   {
-    path: "/dashboard-admin",
-    name: "DashboardAdmin",
-    component: DashboardAdmin,
+    path: "/home",
+    name: "home",
+    component: () => import("@/pages/HomePage/HomeView.vue"),
+    meta: {
+      title: "Home",
+      guard: "auth",
+    },
   },
   {
-    path: "/dashboard-businessowners",
-    name: "DashboardBusinessOwners",
-    component: DashboardBusinessOwners,
+    path: "/signin",
+    name: "login",
+    component: () => import("@/pages/LoginPage/Login.vue"),
+    meta: {
+      title: "Login",
+      guard: "guest",
+    },
+  },
+  // Registration
+  {
+    path: "/signup",
+    name: "register",
+    component: () => import("@/pages/RegisterPage/Register.vue"),
+    meta: {
+      title: "User Registration",
+      guard: "guest",
+    },
+  },
+  // Business Owner routes
+  {
+    path: '/business-owner',
+    name: 'business-owner',
+    component: () => import('@/pages/BusinessOwnerPage/BusinessOwnerView.vue'),
+    meta: {
+      title: 'Business Owner Dashboard',
+      guard: 'auth'
+    }
   },
   {
-    path: "/dashboard-properties",
-    name: "DashboardProperties",
-    component: DashboardProperties,
+    path: '/business-owner/pick-location',
+    name: 'gmap-location-picker',
+    component: () => import('@/pages/BusinessOwnerPage/GmapPickLocationView.vue'),
+    meta: {
+      title: 'Pick Your Location',
+      guard: 'auth'
+    }
+  },
+  // Error Pages
+  {
+    path: "/access-denied",
+    name: "access-denied",
+    component: () => import("@/pages/errors/AccessDenied.vue"),
+    meta: {
+      title: "Access Denied",
+    },
   },
   {
-    path: "/dashboard-analytics",
-    name: "DashboardAnalytics",
-    component: DashboardAnalytics,
-  },
-  {
-    path: "/dashboard-transactions",
-    name: "DashboardTransactions",
-    component: DashboardTransactions,
-  },
-  {
-    path: "/dashboard-support",
-    name: "DashboardSupport",
-    component: DashboardSupport,
-  },
-  {
-    path: "/dashboard-settings",
-    name: "DashboardSettings",
-    component: DashboardSettings,
+    path: "/:pathMatch(.*)*",
+    redirect: "/page-not-found",
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// Navigation guards
+router.beforeEach((to, _from, next) => {
+  const authStore = useAuthStore();
+  const isAuthenticated = authStore.isAuthenticated;
+
+  // Check if the route requires authentication
+  if (to.meta.guard === "auth" && !isAuthenticated) {
+    // Redirect to login if not authenticated
+    next({ name: "login" });
+  }
+  // Check if the route is for guests only (like login/register)
+  else if (to.meta.guard === "guest" && isAuthenticated) {
+    // Redirect to home if already authenticated
+    next({ name: "home" });
+  } else {
+    next();
+  }
 });
 
 export default router;

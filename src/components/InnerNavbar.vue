@@ -1,11 +1,22 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import ModeToggle from "@/components/ModeToggle.vue";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuthStore } from "@/stores/authStore";
+import TypographyH3 from "./ui/typography/TypographyH3.vue";
+import { Mail, Bell } from "lucide-vue-next";
 
 const router = useRouter();
+const authStore = useAuthStore();
 const isMobileMenuOpen = ref(false);
+
+const userInitials = computed(() => {
+  const name = authStore.userName;
+  if (!name) return 'U';
+  return name.split(' ').map((n: string) => n[0]).join('').toUpperCase().substring(0, 2);
+});
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
@@ -28,25 +39,29 @@ const navigateTo = (path: string) => {
           <Button
             variant="link"
             @click="navigateTo('/')"
-            class="hover:no-underline p-0 h-auto"
+            class="hover:no-underline p-0 h-auto gap-2"
           >
             <img
               src="/logo.png"
               alt="Biznest Logo"
-              class="h-25 w-auto rounded-full"
+              class="h-20 w-20 rounded-full object-cover p-0 m-0"
             />
+
+            <TypographyH3 class="montserrat-semibold">Biznest</TypographyH3>
           </Button>
         </div>
 
         <!-- Desktop Auth Buttons -->
-        <div class="hidden md:flex md:items-center md:space-x-4">
+        <div
+          class="hidden md:flex md:items-center md:space-x-8 flex-shrink-0 text-prof-gold"
+        >
           <ModeToggle />
-          <Button
-            @click="navigateTo('/signup')"
-            class="bg-prof-gold hover:bg-prof-gold/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
-          >
-            Get Started
-          </Button>
+          <Mail />
+          <Bell />
+          <Avatar class="cursor-pointer" @click="navigateTo('/profile')">
+            <AvatarImage :src="authStore.user?.avatar || ''" :alt="authStore.userName || 'User'" />
+            <AvatarFallback>{{ userInitials }}</AvatarFallback>
+          </Avatar>
         </div>
 
         <!-- Mobile Menu Button -->
