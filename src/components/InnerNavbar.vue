@@ -1,111 +1,150 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useAuthStore } from "@/stores/authStore";
-import { User, LogOut, Settings, LayoutDashboard } from "lucide-vue-next";
 import ModeToggle from "@/components/ModeToggle.vue";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import TypographyP from "./ui/typography/TypographyP.vue";
+import TypographyH3 from "./ui/typography/TypographyH3.vue";
+import { Mail, Bell } from "lucide-vue-next";
 
 const router = useRouter();
-const authStore = useAuthStore();
+const isMobileMenuOpen = ref(false);
 
-const userInitials = computed(() => {
-  const name = authStore.user?.name || "";
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-});
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
 
-const handleLogout = () => {
-  authStore.logout();
-  router.push({ name: "login" });
+const navigateTo = (path: string) => {
+  router.push(path);
+  isMobileMenuOpen.value = false;
 };
 </script>
 
 <template>
-  <header
-    class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+  <nav
+    class="bg-background/90 border-b border-prof-navy/10 sticky top-0 z-50 backdrop-blur-sm"
   >
-    <div class="container flex h-14 items-center px-4 md:px-6">
-      <!-- Logo / Brand -->
-      <div class="mr-4 flex">
-        <router-link to="/home" class="mr-6 flex items-center space-x-2">
-          <LayoutDashboard class="h-6 w-6" />
-          <span class="hidden font-bold sm:inline-block"> Biznest </span>
-        </router-link>
-      </div>
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center">
+          <Button
+            variant="link"
+            @click="navigateTo('/')"
+            class="hover:no-underline p-0 h-auto gap-2"
+          >
+            <img
+              src="/logo.png"
+              alt="Biznest Logo"
+              class="h-20 w-20 rounded-full object-cover p-0 m-0"
+            />
 
-      <!-- Desktop Navigation -->
-      <nav class="flex items-center space-x-6 text-sm font-medium">
-        <router-link
-          to="/home"
-          class="transition-colors hover:text-foreground/80 text-foreground/60"
-          active-class="text-foreground"
+            <TypographyH3 class="montserrat-semibold">Biznest</TypographyH3>
+          </Button>
+        </div>
+
+        <!-- Desktop Auth Buttons -->
+        <div
+          class="hidden md:flex md:items-center md:space-x-8 flex-shrink-0 text-prof-gold"
         >
-          Dashboard
-        </router-link>
-      </nav>
+          <ModeToggle />
+          <Mail />
+          <Bell />
+          <Button
+            @click="navigateTo('/signup')"
+            class="bg-prof-gold hover:bg-prof-gold/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
+          >
+            Get Started
+          </Button>
+        </div>
 
-      <!-- Right Side Actions -->
-      <div class="flex flex-1 items-center justify-end space-x-4">
-        <ModeToggle />
-
-        <DropdownMenu>
-          <DropdownMenuTrigger as-child>
-            <Button variant="ghost" class="relative h-8 w-8 rounded-full">
-              <div
-                class="flex h-full w-full items-center justify-center rounded-full bg-muted"
-              >
-                <span class="text-xs font-medium">{{ userInitials }}</span>
-              </div>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent class="w-56" align="end">
-            <DropdownMenuLabel class="font-normal">
-              <div class="flex flex-col space-y-1">
-                <TypographyP class="text-sm font-medium leading-none">{{
-                  authStore.user?.name
-                }}</TypographyP>
-                <TypographyP class="text-xs leading-none text-muted-foreground">
-                  {{ authStore.user?.email }}
-                </TypographyP>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem disabled>
-                <User class="mr-2 h-4 w-4" />
-                <span>Profile</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem disabled>
-                <Settings class="mr-2 h-4 w-4" />
-                <span>Settings</span>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              @click="handleLogout"
-              class="text-red-600 focus:text-red-600"
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            @click="toggleMobileMenu"
+            class="text-foreground/90 hover:text-foreground transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg
+              v-if="!isMobileMenuOpen"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <LogOut class="mr-2 h-4 w-4" />
-              <span>Log out</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+            <svg
+              v-else
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </Button>
+        </div>
       </div>
     </div>
-  </header>
+
+    <!-- Mobile Menu -->
+    <div
+      v-if="isMobileMenuOpen"
+      class="md:hidden bg-prof-navy border-t border-white/10"
+    >
+      <div class="px-4 pt-2 pb-3 space-y-1">
+        <Button
+          variant="ghost"
+          @click="navigateTo('/')"
+          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors h-auto justify-start"
+        >
+          Home
+        </Button>
+        <Button
+          variant="ghost"
+          @click="navigateTo('/about')"
+          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors h-auto justify-start"
+        >
+          About
+        </Button>
+        <Button
+          variant="ghost"
+          @click="navigateTo('/features')"
+          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors h-auto justify-start"
+        >
+          Features
+        </Button>
+        <Button
+          variant="ghost"
+          @click="navigateTo('/contact')"
+          class="block w-full text-left text-foreground hover:text-foreground/90 hover:bg-white/5 px-3 py-2 rounded-md text-base font-medium transition-colors h-auto justify-start"
+        >
+          Contact
+        </Button>
+      </div>
+      <div class="px-4 py-3 border-t border-white/10 space-y-2">
+        <div class="flex justify-center pb-2">
+          <ModeToggle />
+        </div>
+        <Button
+          @click="navigateTo('/signup')"
+          class="block w-full text-center bg-prof-gold hover:bg-prof-gold/90 text-foreground px-3 py-2 rounded-md text-base font-medium transition-colors h-auto"
+        >
+          Get Started
+        </Button>
+      </div>
+    </div>
+  </nav>
 </template>
