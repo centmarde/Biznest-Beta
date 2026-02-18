@@ -14,8 +14,13 @@ const isMobileMenuOpen = ref(false);
 
 const userInitials = computed(() => {
   const name = authStore.userName;
-  if (!name) return 'U';
-  return name.split(' ').map((n: string) => n[0]).join('').toUpperCase().substring(0, 2);
+  if (!name) return "U";
+  return name
+    .split(" ")
+    .map((n: string) => n[0])
+    .join("")
+    .toUpperCase()
+    .substring(0, 2);
 });
 
 const toggleMobileMenu = () => {
@@ -47,7 +52,7 @@ const navigateTo = (path: string) => {
               class="h-20 w-20 rounded-full object-cover p-0 m-0"
             />
 
-            <TypographyH3 class="montserrat-semibold">Biznest</TypographyH3>
+            <TypographyH3 class="montserrat-semibold">BizNest</TypographyH3>
           </Button>
         </div>
 
@@ -59,7 +64,10 @@ const navigateTo = (path: string) => {
           <Mail />
           <Bell />
           <Avatar class="cursor-pointer" @click="navigateTo('/profile')">
-            <AvatarImage :src="authStore.user?.avatar || ''" :alt="authStore.userName || 'User'" />
+            <AvatarImage
+              :src="authStore.user?.avatar || ''"
+              :alt="authStore.userName || 'User'"
+            />
             <AvatarFallback>{{ userInitials }}</AvatarFallback>
           </Avatar>
         </div>

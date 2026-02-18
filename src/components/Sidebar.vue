@@ -57,7 +57,7 @@ const bottomLinks: SidebarLink[] = [
       >
         <Button
           :variant="route.path === link.href ? 'secondary' : 'ghost'"
-          class="justify-center text-foreground montserrat-normal rounded-xl"
+          class="justify-start text-foreground montserrat-normal rounded-xl"
           as-child
         >
           <router-link :to="link.href">
