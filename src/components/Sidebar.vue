@@ -59,7 +59,7 @@ const bottomLinks: SidebarLink[] = [
     >
       <Avatar class="size-30 border-2 border-primary-foreground/20">
         <AvatarImage
-          :src="authStore.user?.avatar || ''"
+          :src="authStore.user?.avatar || '/avatar.png'"
           :alt="authStore.user?.name || 'User'"
           class="object-cover"
         />

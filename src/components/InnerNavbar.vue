@@ -65,7 +65,7 @@ const navigateTo = (path: string) => {
           <Bell />
           <Avatar class="cursor-pointer" @click="navigateTo('/profile')">
             <AvatarImage
-              :src="authStore.user?.avatar || ''"
+              :src="authStore.user?.avatar || '/avatar.png'"
               :alt="authStore.userName || 'User'"
             />
             <AvatarFallback>{{ userInitials }}</AvatarFallback>
