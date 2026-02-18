@@ -1,11 +1,9 @@
-<script setup lang="ts">
-import InnerLayout from '@/layout/InnerLayout.vue'
+<script lang="ts" setup>
+import InnerLayout from "@/layout/InnerLayout.vue";
 </script>
 
 <template>
   <InnerLayout>
-    <template #content>
-      <router-view />
-    </template>
+    <template #content> </template>
   </InnerLayout>
 </template>
