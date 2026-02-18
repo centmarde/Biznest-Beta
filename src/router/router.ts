@@ -3,68 +3,82 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "vue-router";
-import { useAuthStore } from '@/stores/authStore';
+import { useAuthStore } from "@/stores/authStore";
 
 const routes: RouteRecordRaw[] = [
-    {
-        path: "/",
-        name: "Landing",
-        component: () => import('@/pages/LandingPage/LandingView.vue'),
+  {
+    path: "/",
+    name: "Landing",
+    component: () => import("@/pages/LandingPage/LandingView.vue"),
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: () => import("@/pages/HomePage/HomeView.vue"),
+    meta: {
+      title: "Home",
+      guard: "auth",
     },
-    {
-        path: '/home',
-        name: 'home',
-        component: () => import('@/pages/HomePage/HomeView.vue'),
-        meta: {
-            title: 'Home',
-            guard: 'auth'
-        }
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: () => import("@/pages/AdminPage/AdminView.vue"),
+    meta: {
+      title: "Admin Dashboard",
     },
-    {
-        path: "/businessman",
-        name: "Businessman",
-        component: () => import('@/pages/Businessman/BusinessmanView.vue'),
+  },
+  {
+    path: "/signin",
+    name: "login",
+    component: () => import("@/pages/LoginPage/Login.vue"),
+    meta: {
+      title: "Login",
+      guard: "guest",
     },
-    {
-        path: '/signin',
-        name: 'login',
-        component: () => import('@/pages/LoginPage/Login.vue'),
-        meta: {
-            title: 'Login',
-            guard: 'guest'
-        }
+  },
+  // Registration
+  {
+    path: "/signup",
+    name: "register",
+    component: () => import("@/pages/RegisterPage/Register.vue"),
+    meta: {
+      title: "User Registration",
+      guard: "guest",
     },
-    // Registration
-    {
-        path: '/signup',
-        name: 'register',
-        component: () => import('@/pages/RegisterPage/Register.vue'),
-        meta: {
-            title: 'User Registration',
-            guard: 'guest'
-        }
+  },
+  // Error Pages
+  {
+    path: "/access-denied",
+    name: "access-denied",
+    component: () => import("@/pages/errors/AccessDenied.vue"),
+    meta: {
+      title: "Access Denied",
     },
-    // Error Pages
-    {
-        path: '/access-denied',
-        name: 'access-denied',
-        component: () => import('@/pages/errors/AccessDenied.vue'),
-        meta: {
-            title: 'Access Denied'
-        }
+  },
+  {
+    path: "/business-owner",
+    name: "business-owner",
+    component: () => import("@/pages/BusinessOwnerPage/BusinessOwnerView.vue"),
+    meta: {
+      title: "Business Owner Dashboard",
+      /*  guard: 'auth' */
     },
-    {
-        path: '/page-not-found',
-        name: 'page-not-found',
-        component: () => import('@/pages/errors/404.vue'),
-        meta: {
-            title: 'Page Not Found'
-        }
+  },
+  {
+    path: "/business-owner/pick-location",
+    name: "gmap-location-picker",
+    component: () =>
+      import("@/pages/BusinessOwnerPage/GmapPickLocationView.vue"),
+    meta: {
+      title: "Pick Your Location",
+      /*   guard: 'auth' */
     },
-    {
-        path: '/:pathMatch(.*)*',
-        redirect: '/page-not-found'
-    }
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/page-not-found",
+  },
 ];
 
 const router = createRouter({
@@ -78,16 +92,15 @@ router.beforeEach((to, _from, next) => {
   const isAuthenticated = authStore.isAuthenticated;
 
   // Check if the route requires authentication
-  if (to.meta.guard === 'auth' && !isAuthenticated) {
+  if (to.meta.guard === "auth" && !isAuthenticated) {
     // Redirect to login if not authenticated
-    next({ name: 'login' });
+    next({ name: "login" });
   }
   // Check if the route is for guests only (like login/register)
-  else if (to.meta.guard === 'guest' && isAuthenticated) {
+  else if (to.meta.guard === "guest" && isAuthenticated) {
     // Redirect to home if already authenticated
-    next({ name: 'home' });
-  }
-  else {
+    next({ name: "home" });
+  } else {
     next();
   }
 });
