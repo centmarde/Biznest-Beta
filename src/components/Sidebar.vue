@@ -2,6 +2,8 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuthStore } from "@/stores/authStore";
 import {
   LayoutDashboard,
   Settings,
@@ -13,12 +15,14 @@ import {
 } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 import type { Component } from "vue";
+import TypographyLarge from "./ui/typography/TypographyLarge.vue";
 
 defineOptions({
   inheritAttrs: false,
 });
 
 const route = useRoute();
+const authStore = useAuthStore();
 
 interface SidebarLink {
   name: string;
@@ -44,12 +48,43 @@ const bottomLinks: SidebarLink[] = [
   <div
     :class="
       cn(
-        'w-72 pb-2 bg-card-foreground/90 text-primary-foreground h-[calc(100vh-6rem)] overflow-y-auto m-6 rounded-lg flex flex-col',
+        'w-72 pb-4 bg-card-foreground/90 text-primary-foreground h-[calc(100vh-6rem)] overflow-y-auto m-6 rounded-lg flex flex-col',
         $attrs.class ?? '',
       )
     "
   >
-    <div class="space-y-12 py-10 px-6 flex-1 flex flex-col justify-center">
+    <!-- Welcome User -->
+    <div
+      class="px-6 py-4 mt-4 flex flex-col items-center justify-center gap-4 montserrat-normal"
+    >
+      <Avatar class="size-30 border-2 border-primary-foreground/20">
+        <AvatarImage
+          :src="authStore.user?.avatar || ''"
+          :alt="authStore.user?.name || 'User'"
+          class="object-cover"
+        />
+        <AvatarFallback
+          class="text-2xl font-bold text-foreground bg-secondary"
+          >{{
+            authStore.user?.name?.charAt(0).toUpperCase() || "U"
+          }}</AvatarFallback
+        >
+      </Avatar>
+      <div class="flex flex-col items-center text-center gap-1">
+        <TypographyLarge
+          class="text-lg font-bold truncate max-w-[200px]"
+          :title="authStore.user?.name"
+        >
+          Welcome {{ authStore.user?.name || "User" }}!
+        </TypographyLarge>
+        <Button variant="link" class="h-auto p-0 text-primary-foreground/80">
+          Edit
+        </Button>
+      </div>
+    </div>
+
+    <!-- Main Links -->
+    <div class="space-y-12 px-6 py-6 flex-1 flex flex-col justify-center">
       <Card
         v-for="link in mainLinks"
         :key="link.name"
@@ -68,7 +103,8 @@ const bottomLinks: SidebarLink[] = [
       </Card>
     </div>
 
-    <div class="space-y-1 py-4 px-3">
+    <!-- Bottom Links -->
+    <div class="py-4 px-6 mb-4">
       <Button
         v-for="link in bottomLinks"
         :key="link.name"
