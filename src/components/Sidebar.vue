@@ -27,7 +27,7 @@ interface SidebarLink {
 }
 
 const mainLinks: SidebarLink[] = [
-  { name: "Dashboard", href: "/home", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Documentation", href: "/docs", icon: FileText },
   { name: "Users", href: "/users", icon: Users },
   { name: "Billing", href: "/billing", icon: CreditCard },
@@ -44,7 +44,7 @@ const bottomLinks: SidebarLink[] = [
   <div
     :class="
       cn(
-        'w-72 pb-2 bg-card-foreground/90 text-primary-foreground h-[calc(100vh-6rem)] overflow-y-auto m-6 rounded-lg flex flex-col',
+        'w-72 pb-2 bg-card-foreground/90 text-primary-foreground h-[calc(100vh-6rem)] overflow-y-auto rounded-lg flex flex-col',
         $attrs.class ?? '',
       )
     "

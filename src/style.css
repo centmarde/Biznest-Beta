@@ -199,3 +199,14 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+/* Admin table: keep text visible on row hover in dark mode */
+.dark .admin-table-section [data-slot="table-row"]:hover {
+  background-color: oklch(0.97 0 0);
+}
+
+.dark .admin-table-section [data-slot="table-row"]:hover td,
+.dark .admin-table-section [data-slot="table-row"]:hover .admin-table-user-name,
+.dark .admin-table-section [data-slot="table-row"]:hover .admin-table-user-email {
+  color: oklch(0.145 0 0);
+}
