@@ -6,8 +6,8 @@ import Sidebar from "@/components/Sidebar.vue";
 <template>
   <div class="flex min-h-screen flex-col">
     <InnerNavbar />
-    <div class="flex flex-1">
-      <aside class="hidden w-64 flex-col bg-background md:flex">
+    <div class="flex flex-1 bg-background">
+      <aside class="hidden w-64 flex-col md:flex">
         <Sidebar class="flex-1" />
       </aside>
       <main class="flex-1 p-6">

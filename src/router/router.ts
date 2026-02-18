@@ -21,6 +21,14 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: "/admin",
+    name: "admin",
+    component: () => import("@/pages/AdminPage/AdminView.vue"),
+    meta: {
+      title: "Admin Dashboard",
+    },
+  },
+  {
     path: "/signin",
     name: "login",
     component: () => import("@/pages/LoginPage/Login.vue"),
@@ -47,32 +55,24 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: "Access Denied",
     },
-     {
-        path: '/business-owner',
-        name: 'business-owner',
-        component: () => import('@/pages/BusinessOwnerPage/BusinessOwnerView.vue'),
-        meta: {
-            title: 'Business Owner Dashboard',
-           /*  guard: 'auth' */
-        }
+  },
+  {
+    path: "/business-owner",
+    name: "business-owner",
+    component: () => import("@/pages/BusinessOwnerPage/BusinessOwnerView.vue"),
+    meta: {
+      title: "Business Owner Dashboard",
+      /*  guard: 'auth' */
     },
-    {
-        path: '/business-owner/pick-location',
-        name: 'gmap-location-picker',
-        component: () => import('@/pages/BusinessOwnerPage/GmapPickLocationView.vue'),
-        meta: {
-            title: 'Pick Your Location',
-          /*   guard: 'auth' */
-        }
-    },
-    // Error Pages
-    {
-        path: '/access-denied',
-        name: 'access-denied',
-        component: () => import('@/pages/errors/AccessDenied.vue'),
-        meta: {
-            title: 'Access Denied'
-        }
+  },
+  {
+    path: "/business-owner/pick-location",
+    name: "gmap-location-picker",
+    component: () =>
+      import("@/pages/BusinessOwnerPage/GmapPickLocationView.vue"),
+    meta: {
+      title: "Pick Your Location",
+      /*   guard: 'auth' */
     },
   },
   {

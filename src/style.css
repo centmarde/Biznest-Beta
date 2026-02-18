@@ -111,11 +111,13 @@
   --color-prof-lightblue: var(--prof-lightblue);
   --color-prof-charcoal: var(--prof-charcoal);
   --color-prof-offwhite: var(--prof-offwhite);
+  --color-nav-background: var(--nav-background);
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(90.67% 0.0001 271.152);
+  --nav-background: oklch(96% 0.0001 271.152);
   --foreground: #0a2540;
   --card: oklch(1 0 0);
   --card-foreground: #0a2540;
@@ -149,7 +151,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --prof-navy: #0a2540;
-  --prof-gold: #c9a24d;
+  --prof-gold: #b68d36;
   --prof-lightblue: #e6eef5;
   --prof-charcoal: #2e2e2e;
   --prof-offwhite: #f8f9fa;
@@ -157,6 +159,7 @@
 
 .dark {
   --background: #0a2540;
+  --nav-background: #123356;
   --foreground: oklch(0.985 0 0);
   --card: #0a2540;
   --card-foreground: oklch(0.985 0 0);
@@ -189,6 +192,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --prof-gold: #d6a63f;
 }
 
 @layer base {
