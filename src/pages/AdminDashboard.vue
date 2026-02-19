@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSidebarDashboard } from '@/pages/admin/admin-dashboard/composables/useSidebarDashboard'
+import { useSidebarDashboard } from '@/pages/AdminPage/composables/useAdminDashboard'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
