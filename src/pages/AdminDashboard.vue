@@ -104,7 +104,7 @@ const {
                 <Avatar class="h-10 w-10 ring-2 ring-border">
                   <AvatarFallback
                     :style="{ backgroundColor: owner.avatarColor }"
-                    class="text-white font-semibold text-sm"
+                    class="text-foreground font-semibold text-sm"
                   >
                     {{ owner.initials }}
                   </AvatarFallback>
