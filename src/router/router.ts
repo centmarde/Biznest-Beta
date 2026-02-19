@@ -26,7 +26,20 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/AdminPage/AdminView.vue"),
     meta: {
       title: "Admin Dashboard",
+        /*  guard: 'auth' */
     },
+    redirect: "/admin/dashboard",
+    children: [
+      {
+        path: "dashboard",
+        name: "admin-dashboard",
+        component: () => import("@/pages/AdminDashboard.vue"),
+        meta: {
+          title: "Admin Dashboard",
+          /*  guard: 'auth' */
+        },
+      },
+    ],
   },
   {
     path: "/signin",
@@ -74,6 +87,7 @@ const routes: RouteRecordRaw[] = [
       title: "Pick Your Location",
       /*   guard: 'auth' */
     },
+  },
   {
     path: "/:pathMatch(.*)*",
     redirect: "/page-not-found",

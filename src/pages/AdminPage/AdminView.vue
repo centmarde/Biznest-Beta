@@ -4,6 +4,8 @@ import InnerLayout from "@/layout/InnerLayout.vue";
 
 <template>
   <InnerLayout>
-    <template #content> </template>
+    <template #content>
+      <router-view />
+    </template>
   </InnerLayout>
 </template>
