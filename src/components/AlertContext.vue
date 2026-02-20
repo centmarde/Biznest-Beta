@@ -76,7 +76,7 @@ provide(AlertContextKey, {
         >
           <Alert
             :variant="alert.variant"
-            class="relative shadow-lg bg-background border"
+            class="relative shadow-lg bg-nav-background border"
           >
             <component
               :is="

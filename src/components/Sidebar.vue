@@ -13,16 +13,19 @@ import {
   MessageSquare,
   LogOut,
 } from "lucide-vue-next";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import type { Component } from "vue";
 import TypographyLarge from "./ui/typography/TypographyLarge.vue";
+import { useAlert } from "@/components/AlertContext.vue";
 
 defineOptions({
   inheritAttrs: false,
 });
 
 const route = useRoute();
+const router = useRouter();
 const authStore = useAuthStore();
+const { addAlert } = useAlert();
 
 interface SidebarLink {
   name: string;
@@ -40,8 +43,19 @@ const mainLinks: SidebarLink[] = [
 
 const bottomLinks: SidebarLink[] = [
   { name: "Settings", href: "/settings", icon: Settings },
-  { name: "Logout", href: "/", icon: LogOut },
 ];
+
+const handleLogout = async () => {
+  const userName = authStore.user?.name || "User";
+  await authStore.logout();
+  addAlert({
+    title: "Logged out",
+    description: `Goodbye, ${userName}! You have been successfully logged out.`,
+    variant: "success",
+    duration: 4000,
+  });
+  router.push("/");
+};
 </script>
 
 <template>
@@ -116,6 +130,14 @@ const bottomLinks: SidebarLink[] = [
           <component :is="link.icon" class="mr-2 h-4 w-4" />
           {{ link.name }}
         </router-link>
+      </Button>
+      <Button
+        variant="ghost"
+        class="w-full justify-start text-primary-foreground montserrat-normal hover:bg-primary-foreground/90"
+        @click="handleLogout"
+      >
+        <LogOut class="mr-2 h-4 w-4" />
+        Logout
       </Button>
     </div>
   </div>

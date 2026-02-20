@@ -1,12 +1,42 @@
 {
   "navItems": [
-    { "id": "dashboard", "label": "Dashboard", "icon": "dashboard", "active": true },
-    { "id": "businessowners", "label": "Business Owners", "icon": "users", "active": false },
-    { "id": "properties", "label": "Properties", "icon": "building", "active": false },
-    { "id": "analytics", "label": "Analytics", "icon": "analytics", "active": false },
-    { "id": "transactions", "label": "Transactions", "icon": "transactions", "active": false },
+    {
+      "id": "dashboard",
+      "label": "Dashboard",
+      "icon": "dashboard",
+      "active": true
+    },
+    {
+      "id": "businessowners",
+      "label": "Business Owners",
+      "icon": "users",
+      "active": false
+    },
+    {
+      "id": "properties",
+      "label": "Properties",
+      "icon": "building",
+      "active": false
+    },
+    {
+      "id": "analytics",
+      "label": "Analytics",
+      "icon": "analytics",
+      "active": false
+    },
+    {
+      "id": "transactions",
+      "label": "Transactions",
+      "icon": "transactions",
+      "active": false
+    },
     { "id": "support", "label": "Support", "icon": "support", "active": false },
-    { "id": "settings", "label": "Settings", "icon": "settings", "active": false }
+    {
+      "id": "settings",
+      "label": "Settings",
+      "icon": "settings",
+      "active": false
+    }
   ],
   "statCards": [
     {
@@ -55,7 +85,7 @@
       "properties": 12,
       "status": "active",
       "joinedDate": "Jan 15, 2026",
-      "avatarColor": "#1e3a5f",
+      "avatarColor": "var(--chart-3)",
       "initials": "JD"
     },
     {
@@ -66,7 +96,7 @@
       "properties": 8,
       "status": "pending",
       "joinedDate": "Feb 02, 2026",
-      "avatarColor": "#3b82f6",
+      "avatarColor": "var(--chart-1)",
       "initials": "MR"
     },
     {
@@ -77,7 +107,7 @@
       "properties": 15,
       "status": "active",
       "joinedDate": "Dec 28, 2025",
-      "avatarColor": "#1e3a5f",
+      "avatarColor": "var(--chart-5)",
       "initials": "AL"
     },
     {
@@ -88,7 +118,7 @@
       "properties": 6,
       "status": "active",
       "joinedDate": "Jan 22, 2026",
-      "avatarColor": "#8b5cf6",
+      "avatarColor": "var(--chart-3)",
       "initials": "SS"
     },
     {
@@ -99,7 +129,7 @@
       "properties": 3,
       "status": "inactive",
       "joinedDate": "Nov 10, 2025",
-      "avatarColor": "#6b7280",
+      "avatarColor": "var(--chart-4)",
       "initials": "RC"
     }
   ]
