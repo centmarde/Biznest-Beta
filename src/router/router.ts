@@ -40,6 +40,16 @@ const routes: RouteRecordRaw[] = [
           /*  guard: 'auth' */
         },
       },
+      {
+        path: "billing",
+        name: "admin-billing",
+        component: () =>
+          import("@/pages/AdminPage/components/AdminBilling.vue"),
+        meta: {
+          title: "Admin Billing",
+          /*  guard: 'auth' */
+        },
+      },
     ],
   },
   {
