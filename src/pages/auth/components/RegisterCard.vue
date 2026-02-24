@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import { useRegister } from '@/pages/auth/composables/userRegistration'
+
+// Use composable to handle all state and functions
+const {
+  fullName,
+  email,
+  password,
+  confirmPassword,
+  agreeToTerms,
+  register,
+  registerWithGoogle,
+  registerWithFacebook,
+  registerWithApple,
+  goToLogin
+} = useRegister()
+</script>
+
 <template>
     <Card class="w-full mx-auto max-h-full overflow-hidden">
     <CardHeader class="text-center pb-2 pt-4">
@@ -151,28 +174,7 @@
   </Card>
 </template>
 
-<script setup lang="ts">
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import { useRegister } from '@/pages/RegisterPage/composables/userRegistration'
 
-// Use composable to handle all state and functions
-const {
-  fullName,
-  email,
-  password,
-  confirmPassword,
-  agreeToTerms,
-  register,
-  registerWithGoogle,
-  registerWithFacebook,
-  registerWithApple,
-  goToLogin
-} = useRegister()
-</script>
 
 <style scoped>
 
