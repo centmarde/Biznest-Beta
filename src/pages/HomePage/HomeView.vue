@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LoginSimple from './components/LoginSimple.vue'
+
 import TypographyH1 from '@/components/ui/typography/TypographyH1.vue'
 import TypographyP from '@/components/ui/typography/TypographyP.vue'
 </script>
