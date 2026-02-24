@@ -39,6 +39,11 @@ export interface RevenueEntry {
   revenue: number
 }
 
+export interface FilterOption {
+  id: string
+  label: string
+}
+
 export interface BillingResponse {
   billingStats: BillingStat[]
   invoices: Invoice[]
