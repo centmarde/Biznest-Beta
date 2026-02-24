@@ -124,7 +124,7 @@ const visiblePages = computed(() => {
             class="h-8 w-8 p-0 transition-all duration-200"
             :class="
               page === currentPage
-                ? 'bg-prof-navy text-white border-prof-navy hover:bg-prof-navy/90 dark:bg-prof-gold dark:text-prof-navy dark:border-prof-gold dark:hover:bg-prof-gold/90'
+                ? 'bg-prof-navy text-prof-offwhite border-prof-navy hover:bg-prof-navy/90 dark:bg-prof-gold dark:text-prof-navy dark:border-prof-gold dark:hover:bg-prof-gold/90'
                 : 'hover:bg-muted'
             "
             @click="goToPage(page as number)"
