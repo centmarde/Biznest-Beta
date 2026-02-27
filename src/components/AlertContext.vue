@@ -66,13 +66,13 @@ provide(AlertContextKey, {
 
   <Teleport to="body">
     <div
-      class="fixed top-20 right-4 z-[100] flex flex-col gap-2 w-full max-w-sm pointer-events-none"
+      class="fixed top-4 right-4 z-[9999] flex flex-col gap-2 w-80 pointer-events-none"
     >
       <TransitionGroup name="alert-slide">
         <div
           v-for="alert in alerts"
           :key="alert.id"
-          class="pointer-events-auto w-full transition-all duration-300 ease-in-out"
+          class="pointer-events-auto w-full min-h-[80px] transition-all duration-300 ease-in-out"
         >
           <Alert
             :variant="alert.variant"
