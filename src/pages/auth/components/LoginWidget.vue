@@ -1,3 +1,143 @@
+
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import {
+  TypographyH2,
+  TypographyH3,
+  TypographyLead,
+  TypographyP
+} from '@/components/ui/typography'
+import { useAuthStore } from '@/stores/authStore'
+import { useRealtimeValidation } from '@/utils/validators'
+import { useAlert } from '@/components/AlertContext.vue'
+
+const router = useRouter()
+const authStore = useAuthStore()
+const { addAlert } = useAlert()
+const { validateEmail, validatePassword } = useRealtimeValidation()
+
+// Form state
+const email = ref('')
+const password = ref('')
+const rememberMe = ref(false)
+
+// Realtime validation
+const emailValidation = computed(() => validateEmail(email.value))
+const passwordValidation = computed(() => validatePassword(password.value))
+
+// Check if form is valid
+const isFormValid = computed(() => {
+  return emailValidation.value.isValid && passwordValidation.value.isValid
+})
+
+// Clear error when user starts typing
+const clearError = () => {
+  if (authStore.error) {
+    authStore.clearError()
+  }
+}
+
+// Login function
+const login = async () => {
+  // Validate email
+  if (!emailValidation.value.isValid) {
+    addAlert({
+      title: 'Validation Error',
+      description: emailValidation.value.message,
+      variant: 'destructive'
+    })
+    return
+  }
+
+  // Validate password
+  if (!passwordValidation.value.isValid) {
+    addAlert({
+      title: 'Validation Error',
+      description: passwordValidation.value.message,
+      variant: 'destructive'
+    })
+    return
+  }
+
+  const success = await authStore.login({
+    email: email.value,
+    password: password.value
+  })
+
+  if (success) {
+    addAlert({
+      title: 'Login Successful',
+      description: 'Welcome back to Biznest!',
+      variant: 'success'
+    })
+    
+    // Redirect based on user role - use router names for consistency
+    const role = authStore.userRole
+    switch (role) {
+      case 'business-owner':
+        router.push({ name: 'business-owner' })
+        break
+      case 'LGU':
+      case 'admin':
+        router.push({ name: 'admin-dashboard' })
+        break
+      default:
+        router.push({ name: 'home' })
+    }
+  } else if (authStore.error) {
+    addAlert({
+      title: 'Login Failed',
+      description: authStore.error,
+      variant: 'destructive'
+    })
+  }
+}
+
+// Social login functions (placeholder implementations)
+const loginWithGoogle = () => {
+  addAlert({
+    title: 'Feature Not Available',
+    description: 'Google login is not implemented yet.',
+    variant: 'default'
+  })
+}
+
+const loginWithFacebook = () => {
+  addAlert({
+    title: 'Feature Not Available',
+    description: 'Facebook login is not implemented yet.',
+    variant: 'default'
+  })
+}
+
+const loginWithApple = () => {
+  addAlert({
+    title: 'Feature Not Available',
+    description: 'Apple login is not implemented yet.',
+    variant: 'default'
+  })
+}
+
+// Navigation functions
+const goToRegister = () => {
+  router.push('/register')
+}
+
+const forgotPassword = () => {
+  addAlert({
+    title: 'Feature Not Available',
+    description: 'Forgot password feature is not implemented yet.',
+    variant: 'default'
+  })
+}
+</script>
+
 <template>
   <Card class="w-full max-w-3xl mx-auto shadow-lg">
     <CardContent class="p-0">
@@ -12,6 +152,8 @@
             </TypographyLead>
           </div>
 
+
+
           <form @submit.prevent="login" class="space-y-4">
             <div class="space-y-1">
               <Label for="email">Email</Label>
@@ -22,6 +164,7 @@
                 placeholder="Enter your email"
                 required
                 class="w-full"
+                @input="clearError"
               />
             </div>
 
@@ -40,6 +183,7 @@
                 placeholder="Enter your password"
                 required
                 class="w-full"
+                @input="clearError"
               />
             </div>
 
@@ -58,9 +202,10 @@
             <Button
               type="submit"
               size="lg"
-              class="w-full bg-prof-navy hover:bg-prof-navy/90 dark:bg-primary dark:hover:bg-primary/90"
+              :disabled="authStore.isLoading || !isFormValid"
+              class="w-full bg-prof-navy hover:bg-prof-navy/90 dark:bg-primary dark:hover:bg-primary/90 disabled:opacity-50"
             >
-              Sign In
+              {{ authStore.isLoading ? 'Signing In...' : 'Sign In' }}
             </Button>
           </form>
 
@@ -132,29 +277,3 @@
   </Card>
 </template>
 
-<script setup lang="ts">
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import {
-  TypographyH2,
-  TypographyH3,
-  TypographyLead,
-  TypographyP
-} from '@/components/ui/typography'
-import { useLogin } from '@/pages/auth/composables/useLogin'
-
-const {
-  email,
-  password,
-  rememberMe,
-  login,
-  loginWithGoogle,
-  loginWithFacebook,
-  loginWithApple,
-  goToRegister,
-  forgotPassword
-} = useLogin()
-</script>

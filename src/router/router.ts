@@ -17,7 +17,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/HomePage/HomeView.vue"),
     meta: {
       title: "Home",
-      guard: "auth",
+      /* guard: "auth", */
     },
   },
   {
@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/AdminPage/AdminView.vue"),
     meta: {
       title: "Admin Dashboard",
-      /*  guard: 'auth' */
+       guard: 'auth'
     },
     redirect: "/admin/dashboard",
     children: [
@@ -37,7 +37,7 @@ const routes: RouteRecordRaw[] = [
           import("@/pages/AdminPage/components/AdminDashboard.vue"),
         meta: {
           title: "Admin Dashboard",
-          /*  guard: 'auth' */
+           guard: 'auth'
         },
       },
     ],
@@ -76,7 +76,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/BusinessOwnerPage/BusinessOwnerView.vue"),
     meta: {
       title: "Business Owner Dashboard",
-      /*  guard: 'auth' */
+       guard: 'auth'
     },
   },
   {
@@ -86,7 +86,15 @@ const routes: RouteRecordRaw[] = [
       import("@/pages/BusinessOwnerPage/GmapPickLocationView.vue"),
     meta: {
       title: "Pick Your Location",
-      /*   guard: 'auth' */
+        guard: 'auth'
+    },
+  },
+  {
+    path: "/page-not-found",
+    name: "404",
+    component: () => import("@/pages/errors/404.vue"),
+    meta: {
+      title: "Page Not Found",
     },
   },
   {
@@ -101,22 +109,53 @@ const router = createRouter({
 });
 
 // Navigation guards
-router.beforeEach((to, _from, next) => {
+router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
   const isAuthenticated = authStore.isAuthenticated;
+  const userRole = authStore.userRole;
+
+  // Prevent infinite redirect loops
+  if (from.name === to.name) {
+    next();
+    return;
+  }
 
   // Check if the route requires authentication
   if (to.meta.guard === "auth" && !isAuthenticated) {
     // Redirect to login if not authenticated
     next({ name: "login" });
+    return;
   }
+  
   // Check if the route is for guests only (like login/register)
-  else if (to.meta.guard === "guest" && isAuthenticated) {
-    // Redirect to home if already authenticated
-    next({ name: "home" });
-  } else {
-    next();
+  if (to.meta.guard === "guest" && isAuthenticated) {
+    // Prevent redirecting if already on the target route
+    const targetRoute = userRole === "business-owner" ? "business-owner" : 
+                       (userRole === "LGU" || userRole === "admin") ? "admin-dashboard" : 
+                       "home";
+    
+    if (to.name !== targetRoute) {
+      next({ name: targetRoute });
+      return;
+    }
   }
+  
+  // Role-based access control for protected routes
+  if (to.meta.guard === "auth" && isAuthenticated) {
+    // Check if user has access to admin routes
+    if (to.name?.toString().startsWith('admin') && userRole !== "admin" && userRole !== "LGU") {
+      next({ name: "access-denied" });
+      return;
+    }
+    
+    // Check if user has access to business owner routes
+    if (to.name === "business-owner" && userRole !== "business-owner") {
+      next({ name: "access-denied" });
+      return;
+    }
+  }
+
+  next();
 });
 
 export default router;

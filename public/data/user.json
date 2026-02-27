@@ -4,61 +4,22 @@
       "id": "1",
       "name": "John Doe",
       "email": "Test@gmail.com",
-      "password": "Test123!"
+      "password": "Test123!",
+      "role": "business-owner"
     },
     {
       "id": "2",
       "name": "Jane Smith",
-      "email": "Sample@gmail.com",
-      "password": "Test123!"
+      "email": "Test2@gmail.com",
+      "password": "Test123!",
+      "role": "LGU"
     },
     {
       "id": "37c1",
       "name": "John Paul Pracullos",
       "email": "pracullos@gmail.com",
-      "password": "Password123"
-    }
-  ],
-  "login": [
-    {
-      "user": {
-        "id": 1,
-        "name": "John Doe",
-        "email": "Test@gmail.com",
-        "password": "Test123!"
-      },
-      "token": "jwt-token",
-      "id": "f683"
-    },
-    {
-      "user": {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "Sample@gmail.com",
-        "password": "Test123!"
-      },
-      "token": "jwt-token",
-      "id": "291b"
-    },
-    {
-      "id": "a2b8",
-      "user": {
-        "id": "1",
-        "name": "John Doe",
-        "email": "Test@gmail.com",
-        "password": "Test123!"
-      },
-      "token": "jwt-token-1771010646513"
-    },
-    {
-      "id": "4a5a",
-      "user": {
-        "id": "37c1",
-        "name": "John Paul Pracullos",
-        "email": "pracullos@gmail.com",
-        "password": "Password123"
-      },
-      "token": "jwt-token-1771011011146"
+      "password": "Password123",
+      "role": "admin"
     }
   ]
 }
