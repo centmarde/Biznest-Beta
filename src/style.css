@@ -205,11 +205,49 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
+  html {
+    /* Enable smooth theme transitions */
+    transition: color-scheme 0.3s ease;
+  }
+  
+  html.light {
+    color-scheme: light;
+  }
+  
+  html.dark {
+    color-scheme: dark;
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-family: "Montserrat", Arial, sans-serif;
     font-weight: normal;
+    /* Smooth theme transition for all elements */
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
+  
+  /* Professional theme utility classes */
+  .bg-prof-navy { background-color: var(--color-prof-navy); }
+  .bg-prof-gold { background-color: var(--color-prof-gold); }
+  .bg-prof-lightblue { background-color: var(--color-prof-lightblue); }
+  .bg-prof-charcoal { background-color: var(--color-prof-charcoal); }
+  .bg-prof-offwhite { background-color: var(--color-prof-offwhite); }
+  .bg-prof-white { background-color: var(--prof-white, #ffffff); }
+  
+  .text-prof-navy { color: var(--color-prof-navy); }
+  .text-prof-gold { color: var(--color-prof-gold); }
+  .text-prof-lightblue { color: var(--color-prof-lightblue); }
+  .text-prof-charcoal { color: var(--color-prof-charcoal); }
+  .text-prof-offwhite { color: var(--color-prof-offwhite); }
+  .text-prof-white { color: var(--prof-white, #ffffff); }
+  
+  .border-prof-navy { border-color: var(--color-prof-navy); }
+  .border-prof-gold { border-color: var(--color-prof-gold); }
+  .border-prof-lightblue { border-color: var(--color-prof-lightblue); }
+  .border-prof-charcoal { border-color: var(--color-prof-charcoal); }
+  .border-prof-offwhite { border-color: var(--color-prof-offwhite); }
+  .border-prof-white { border-color: var(--prof-white, #ffffff); }
 }
 
 /* Admin table: keep text visible on row hover in dark mode */

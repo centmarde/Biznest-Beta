@@ -42,7 +42,7 @@ const navigateTo = (path: string) => {
         <div class="hidden md:flex md:items-center md:space-x-4">
           <ModeToggle />
           <Button
-            @click="navigateTo('/signup')"
+            @click="navigateTo('/signin')"
             class="bg-prof-gold hover:bg-prof-gold/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
           >
             Get Started
