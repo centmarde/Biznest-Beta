@@ -1,16 +1,14 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { axios } from '@/lib/axios'
+import axios from 'axios'
 
 interface User {
-  id: number
+  id: string
   name: string
   email: string
-}
-
-interface LoginResponse {
-  user: User
-  token: string
+  password?: string
+  avatar?: string
+  role: 'business-owner' | 'LGU' | 'admin'
 }
 
 interface LoginCredentials {
@@ -22,19 +20,20 @@ interface RegisterCredentials {
   name: string
   email: string
   password: string
+  role: 'business-owner' | 'LGU' | 'admin'
 }
 
 export const useAuthStore = defineStore('auth', () => {
   // State - using ref()
   const user = ref<User | null>(null)
-  const token = ref<string | null>(null)
   const isLoading = ref(false)
   const error = ref<string | null>(null)
 
   // Computed - using computed()
-  const isAuthenticated = computed(() => !!token.value && !!user.value)
+  const isAuthenticated = computed(() => !!user.value)
   const userName = computed(() => user.value?.name || '')
   const userEmail = computed(() => user.value?.email || '')
+  const userRole = computed(() => user.value?.role || null)
 
   // Functions
   const login = async (credentials: LoginCredentials): Promise<boolean> => {
@@ -42,39 +41,36 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
 
     try {
-      // First, verify user exists with correct credentials
-      const { data: users } = await axios.get<User[]>('/users', {
-        params: {
-          email: credentials.email,
-          password: credentials.password
-        }
+      // Create a separate axios instance for static files served by Vite dev server
+      const staticAxios = axios.create({
+        baseURL: window.location.origin,
+        timeout: 10000,
       })
 
-      if (users.length === 0) {
+      // Fetch users from the public directory using axios
+      // Files in public/ are served directly by Vite dev server
+      const response = await staticAxios.get('/data/user.json')
+      const users = response.data.users || []
+
+      // Find user with matching email and password
+      const foundUser = users.find((u: User) => 
+        u.email === credentials.email && u.password === credentials.password
+      )
+
+      if (!foundUser) {
         throw new Error('Invalid email or password')
       }
 
-      const foundUser = users[0]
-
-      // Create login record (json-server will auto-generate token)
-      const { data: loginData } = await axios.post<LoginResponse>('/login', {
-        user: foundUser,
-        token: `jwt-token-${Date.now()}` // Simple token generation
-      })
-
-      // Store user and token
-      user.value = loginData.user
-      token.value = loginData.token
+      // Store user
+      user.value = foundUser
 
       // Persist to localStorage
-      localStorage.setItem('authToken', loginData.token)
-      localStorage.setItem('authUser', JSON.stringify(loginData.user))
+      localStorage.setItem('authUser', JSON.stringify(foundUser))
 
       return true
     } catch (err: any) {
       error.value = err.message || 'Login failed. Please check your credentials.'
       user.value = null
-      token.value = null
       return false
     } finally {
       isLoading.value = false
@@ -84,11 +80,9 @@ export const useAuthStore = defineStore('auth', () => {
   const logout = async (): Promise<void> => {
     // Clear state
     user.value = null
-    token.value = null
     error.value = null
 
     // Clear localStorage
-    localStorage.removeItem('authToken')
     localStorage.removeItem('authUser')
   }
 
@@ -97,38 +91,38 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
 
     try {
-      // Check if user already exists
-      const { data: existingUsers } = await axios.get<User[]>('/users', {
-        params: {
-          email: credentials.email
-        }
+      // Create a separate axios instance for static files served by Vite dev server
+      const staticAxios = axios.create({
+        baseURL: window.location.origin,
+        timeout: 10000,
       })
 
-      if (existingUsers.length > 0) {
+      // Fetch users from the public directory using axios
+      const response = await staticAxios.get('/data/user.json')
+      const users = response.data.users || []
+
+      // Check if user already exists
+      const existingUser = users.find((u: User) => u.email === credentials.email)
+
+      if (existingUser) {
         throw new Error('An account with this email already exists')
       }
 
-      // Create new user
-      const { data: newUser } = await axios.post<User>('/users', {
+      // For simplicity, we'll just simulate registration success
+      // In a real app, you'd save to backend
+      const newUser: User = {
+        id: Date.now().toString(),
         name: credentials.name,
         email: credentials.email,
-        password: credentials.password
-      })
+        password: credentials.password,
+        role: credentials.role
+      }
 
-      // Auto-login after registration
-      const loginToken = `jwt-token-${Date.now()}`
-      const { data: loginData } = await axios.post<LoginResponse>('/login', {
-        user: newUser,
-        token: loginToken
-      })
-
-      // Store user and token
-      user.value = loginData.user
-      token.value = loginData.token
+      // Store user for auto-login
+      user.value = newUser
 
       // Persist to localStorage
-      localStorage.setItem('authToken', loginData.token)
-      localStorage.setItem('authUser', JSON.stringify(loginData.user))
+      localStorage.setItem('authUser', JSON.stringify(newUser))
 
       return true
     } catch (err: any) {
@@ -138,7 +132,6 @@ export const useAuthStore = defineStore('auth', () => {
         error.value = err.message || 'Registration failed. Please try again.'
       }
       user.value = null
-      token.value = null
       return false
     } finally {
       isLoading.value = false
@@ -146,12 +139,10 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const checkAuth = (): boolean => {
-    const storedToken = localStorage.getItem('authToken')
     const storedUser = localStorage.getItem('authUser')
 
-    if (storedToken && storedUser) {
+    if (storedUser) {
       try {
-        token.value = storedToken
         user.value = JSON.parse(storedUser)
         return true
       } catch (err) {
@@ -177,13 +168,13 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     // State
     user,
-    token,
     isLoading,
     error,
     // Computed
     isAuthenticated,
     userName,
     userEmail,
+    userRole,
     // Functions
     login,
     register,
