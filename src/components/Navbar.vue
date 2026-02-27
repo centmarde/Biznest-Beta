@@ -19,7 +19,7 @@ const navigateTo = (path: string) => {
 
 <template>
   <nav
-    class="bg-background/90 border-b border-prof-navy/10 sticky top-0 z-50 backdrop-blur-sm"
+    class="bg-nav-background border-b border-prof-navy/10 sticky top-0 z-50 backdrop-blur-sm"
   >
     <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
@@ -42,7 +42,7 @@ const navigateTo = (path: string) => {
         <div class="hidden md:flex md:items-center md:space-x-4">
           <ModeToggle />
           <Button
-            @click="navigateTo('/signup')"
+            @click="navigateTo('/signin')"
             class="bg-prof-gold hover:bg-prof-gold/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
           >
             Get Started

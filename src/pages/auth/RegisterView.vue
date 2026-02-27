@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import LoginCard from '@/pages/LoginPage/components/LoginCard.vue'
+import RegisterCard from '@/pages/auth/components/RegisterWidget.vue'
 </script>
 
 <template>
-  <div class="min-h-screen h-screen overflow-hidden relative flex items-center justify-end">
+  <div class="min-h-screen h-screen overflow-hidden relative flex items-center justify-center">
     <!-- Background Image -->
     <div
       class="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -13,9 +13,9 @@ import LoginCard from '@/pages/LoginPage/components/LoginCard.vue'
       <div class="absolute inset-0 bg-black/40"></div>
     </div>
 
-    <!-- Login Card Container - Right Side -->
-    <div class="relative z-10 w-full max-w-md mr-8 lg:mr-16 xl:mr-24">
-      <LoginCard />
+    <!-- Registration Card Container - Centered -->
+    <div class="relative z-10 w-full max-w-3xl px-4">
+      <RegisterCard />
     </div>
   </div>
 </template>
