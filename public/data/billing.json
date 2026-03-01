@@ -1,0 +1,217 @@
+{
+  "billingStats": [
+    {
+      "id": "total-revenue",
+      "label": "Total Revenue",
+      "value": "$142,580",
+      "change": "↑ 14% from last month",
+      "changeType": "positive",
+      "iconType": "revenue"
+    },
+    {
+      "id": "pending-invoices",
+      "label": "Pending Invoices",
+      "value": "23",
+      "change": "↓ 5% from last month",
+      "changeType": "negative",
+      "iconType": "pending"
+    },
+    {
+      "id": "paid-invoices",
+      "label": "Paid This Month",
+      "value": "187",
+      "change": "↑ 9% from last month",
+      "changeType": "positive",
+      "iconType": "paid"
+    },
+    {
+      "id": "overdue",
+      "label": "Overdue Payments",
+      "value": "8",
+      "change": "↓ 2% from last month",
+      "changeType": "negative",
+      "iconType": "overdue"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV-2026-001",
+      "businessOwner": "John Dela Cruz",
+      "businessName": "Urban Spaces PH",
+      "email": "john.dc@email.com",
+      "amount": 2450.0,
+      "status": "paid",
+      "dueDate": "2026-02-15",
+      "paidDate": "2026-02-12",
+      "plan": "Enterprise",
+      "initials": "JD",
+      "avatarColor": "var(--chart-3)"
+    },
+    {
+      "id": "INV-2026-002",
+      "businessOwner": "Maria Rodriguez",
+      "businessName": "Metro Retail Corp",
+      "email": "maria.r@email.com",
+      "amount": 1200.0,
+      "status": "pending",
+      "dueDate": "2026-02-28",
+      "paidDate": null,
+      "plan": "Professional",
+      "initials": "MR",
+      "avatarColor": "var(--chart-1)"
+    },
+    {
+      "id": "INV-2026-003",
+      "businessOwner": "Antonio Lopez",
+      "businessName": "Prime Properties",
+      "email": "antonio.l@email.com",
+      "amount": 3800.0,
+      "status": "paid",
+      "dueDate": "2026-02-10",
+      "paidDate": "2026-02-08",
+      "plan": "Enterprise",
+      "initials": "AL",
+      "avatarColor": "var(--chart-5)"
+    },
+    {
+      "id": "INV-2026-004",
+      "businessOwner": "Sofia Santos",
+      "businessName": "Venture Spaces Inc",
+      "email": "sofia.s@email.com",
+      "amount": 750.0,
+      "status": "overdue",
+      "dueDate": "2026-02-05",
+      "paidDate": null,
+      "plan": "Starter",
+      "initials": "SS",
+      "avatarColor": "var(--chart-3)"
+    },
+    {
+      "id": "INV-2026-005",
+      "businessOwner": "Ramon Cruz",
+      "businessName": "Business Hub Co",
+      "email": "ramon.c@email.com",
+      "amount": 1200.0,
+      "status": "paid",
+      "dueDate": "2026-01-31",
+      "paidDate": "2026-01-29",
+      "plan": "Professional",
+      "initials": "RC",
+      "avatarColor": "var(--chart-4)"
+    },
+    {
+      "id": "INV-2026-006",
+      "businessOwner": "Elena Reyes",
+      "businessName": "Greenfield Realty",
+      "email": "elena.r@email.com",
+      "amount": 2450.0,
+      "status": "pending",
+      "dueDate": "2026-03-01",
+      "paidDate": null,
+      "plan": "Enterprise",
+      "initials": "ER",
+      "avatarColor": "var(--chart-2)"
+    },
+    {
+      "id": "INV-2026-007",
+      "businessOwner": "Carlos Mendoza",
+      "businessName": "Pacific Ventures",
+      "email": "carlos.m@email.com",
+      "amount": 750.0,
+      "status": "overdue",
+      "dueDate": "2026-02-01",
+      "paidDate": null,
+      "plan": "Starter",
+      "initials": "CM",
+      "avatarColor": "var(--chart-1)"
+    },
+    {
+      "id": "INV-2026-008",
+      "businessOwner": "Isabel Tan",
+      "businessName": "Metro Business Park",
+      "email": "isabel.t@email.com",
+      "amount": 3800.0,
+      "status": "paid",
+      "dueDate": "2026-02-20",
+      "paidDate": "2026-02-18",
+      "plan": "Enterprise",
+      "initials": "IT",
+      "avatarColor": "var(--chart-5)"
+    },
+    {
+      "id": "INV-2026-009",
+      "businessOwner": "Miguel Garcia",
+      "businessName": "Cityscape Holdings",
+      "email": "miguel.g@email.com",
+      "amount": 1200.0,
+      "status": "pending",
+      "dueDate": "2026-03-05",
+      "paidDate": null,
+      "plan": "Professional",
+      "initials": "MG",
+      "avatarColor": "var(--chart-4)"
+    },
+    {
+      "id": "INV-2026-010",
+      "businessOwner": "Ana Villanueva",
+      "businessName": "Sunrise Properties",
+      "email": "ana.v@email.com",
+      "amount": 2450.0,
+      "status": "paid",
+      "dueDate": "2026-02-18",
+      "paidDate": "2026-02-16",
+      "plan": "Enterprise",
+      "initials": "AV",
+      "avatarColor": "var(--chart-2)"
+    }
+  ],
+  "plans": [
+    {
+      "id": "starter",
+      "name": "Starter",
+      "price": 750,
+      "billingCycle": "monthly",
+      "features": [
+        "Up to 5 property listings",
+        "Basic analytics",
+        "Email support",
+        "Standard matching"
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "price": 1200,
+      "billingCycle": "monthly",
+      "features": [
+        "Up to 25 property listings",
+        "Advanced analytics",
+        "Priority support",
+        "Smart matching algorithm",
+        "Custom reports"
+      ]
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "price": 2450,
+      "billingCycle": "monthly",
+      "features": [
+        "Unlimited property listings",
+        "Full analytics suite",
+        "Dedicated account manager",
+        "AI-powered matching",
+        "Custom integrations",
+        "API access"
+      ]
+    }
+  ],
+  "revenueHistory": [
+    { "month": "Sep 2025", "revenue": 98200 },
+    { "month": "Oct 2025", "revenue": 105400 },
+    { "month": "Nov 2025", "revenue": 112800 },
+    { "month": "Dec 2025", "revenue": 121500 },
+    { "month": "Jan 2026", "revenue": 134200 },
+    { "month": "Feb 2026", "revenue": 142580 }
+  ]
+}

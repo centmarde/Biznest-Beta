@@ -37,7 +37,7 @@ const mainLinks: SidebarLink[] = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Documentation", href: "/docs", icon: FileText },
   { name: "Users", href: "/users", icon: Users },
-  { name: "Billing", href: "/billing", icon: CreditCard },
+  { name: "Billing", href: "/admin/billing", icon: CreditCard },
   { name: "Messages", href: "/messages", icon: MessageSquare },
 ];
 
